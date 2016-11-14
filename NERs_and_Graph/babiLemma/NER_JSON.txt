@@ -1,0 +1,152 @@
+{
+    "1": {
+        "Lemma_Verb": "move",
+        "POS_NN": "bathroom",
+        "POS_NNP": "John",
+        "POS_Verb": "moved",
+        "SNO": [
+            "1"
+        ],
+        "Sentence": " John moved to the bathroom"
+    },
+    "10": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "went",
+        "SNO": [
+            "10"
+        ],
+        "Sentence": " Daniel went back to the office"
+    },
+    "11": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "journeyed",
+        "SNO": [
+            "11"
+        ],
+        "Sentence": " Daniel journeyed to the bathroom"
+    },
+    "12": {
+        "Lemma_Verb": "be",
+        "POS_NNP": "John",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": [
+            "12"
+        ],
+        "Sentence": " Where is John?"
+    },
+    "13": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "John",
+        "POS_Verb": "went",
+        "SNO": [
+            "13"
+        ],
+        "Sentence": " John went back to the office"
+    },
+    "14": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Mary",
+        "POS_Verb": "travelled",
+        "SNO": [
+            "14"
+        ],
+        "Sentence": " Mary travelled to the bedroom"
+    },
+    "15": {
+        "Lemma_Verb": "be",
+        "POS_NNP": "John",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": [
+            "15"
+        ],
+        "Sentence": " Where is John?"
+    },
+    "2": {
+        "Lemma_Verb": "go",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "went",
+        "SNO": [
+            "2"
+        ],
+        "Sentence": " Daniel went to the kitchen"
+    },
+    "3": {
+        "Lemma_Verb": "be",
+        "POS_NNP": "John",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": [
+            "3"
+        ],
+        "Sentence": " Where is John?"
+    },
+    "4": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "travelled",
+        "SNO": [
+            "4"
+        ],
+        "Sentence": " Sandra travelled to the kitchen"
+    },
+    "5": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "hallway",
+        "POS_NNP": "Mary",
+        "POS_Verb": "travelled",
+        "SNO": [
+            "5"
+        ],
+        "Sentence": " Mary travelled to the hallway"
+    },
+    "6": {
+        "Lemma_Verb": "be",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": [
+            "6"
+        ],
+        "Sentence": " Where is Daniel?"
+    },
+    "7": {
+        "Lemma_Verb": "go",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "went",
+        "SNO": [
+            "7"
+        ],
+        "Sentence": " Sandra went back to the bathroom"
+    },
+    "8": {
+        "Lemma_Verb": "go",
+        "POS_NN": "kitchen",
+        "POS_NNP": "John",
+        "POS_Verb": "went",
+        "SNO": [
+            "8"
+        ],
+        "Sentence": " John went back to the kitchen"
+    },
+    "9": {
+        "Lemma_Verb": "be",
+        "POS_NNP": "Mary",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": [
+            "9"
+        ],
+        "Sentence": " Where is Mary?"
+    }
+}

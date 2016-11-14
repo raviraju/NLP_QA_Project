@@ -1,0 +1,17 @@
+1 Mary got the milk there.
+2 John moved to the bedroom.
+3 Sandra went back to the kitchen.
+4 Mary travelled to the hallway.
+5 Where is the milk? 	hallway	1 4
+6 John got the football there.
+7 John went to the hallway.
+8 Where is the football? 	hallway	6 7
+9 John put down the football.
+10 Mary went to the garden.
+11 Where is the football? 	hallway	9 7
+12 John went to the kitchen.
+13 Sandra travelled to the hallway.
+14 Where is the football? 	hallway	9 7
+15 Daniel went to the hallway.
+16 Mary discarded the milk.
+17 Where is the milk? 	garden	16 10

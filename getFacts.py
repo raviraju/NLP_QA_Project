@@ -23,8 +23,10 @@ def processData(trainingFilePath):
 		with open(factFileName, 'w') as outFile:
 			for line in inFile:
 				if '\t' in line:
-					#print("question : ", line)
-					continue
+					#print(line[:line.index("?")+1])
+					line=line[:line.index("?")+1] +"\n"
+					extractFact(line, outFile)
+					#continue
 				else:
 					extractFact(line, outFile)
 	print("Facts written to {}".format(factFileName))

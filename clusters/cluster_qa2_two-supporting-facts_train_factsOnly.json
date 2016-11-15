@@ -1,0 +1,39 @@
+{
+    "3": [
+        "journeyed",
+        "travelled",
+        "went",
+        "moved"
+    ],
+    "2": [
+        "bathroom",
+        "garden",
+        "office",
+        "kitchen",
+        "bedroom",
+        "hallway"
+    ],
+    "0": [
+        "Mary",
+        "Daniel",
+        "Sandra",
+        "John"
+    ],
+    "4": [
+        "milk",
+        "football",
+        "apple"
+    ],
+    "1": [
+        "down",
+        "got",
+        "up",
+        "left",
+        "put",
+        "picked",
+        "discarded",
+        "took",
+        "grabbed",
+        "dropped"
+    ]
+}

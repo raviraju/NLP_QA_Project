@@ -5,6 +5,6 @@ class GlobalsClass:
     STANFORD_BABI_NER_CLASSIFIER="/home/aditya/src/stanfordNER/stanford-ner-2015-12-09/baby-model.ser.gz"
     JSON_FILE="/home/aditya/newJavaSpace/babI/babiLemma/NER_JSON.txt"
     NERTEXT_FILE="/home/aditya/newJavaSpace/babI/babiLemma/NER_TEXT.jl"
-    LEMMA_TEXT="/home/aditya/newJavaSpace/babI/Tests/NERSample/"
+    LEMMA_TEXT="/home/aditya/newJavaSpace/babI/Tests/finalLemmaTestFile"
     #LEMMA_TEXT="/home/aditya/newJavaSpace/babI/Tests/Test_files/"
     CORENLP_SERVER="http://localhost:9000"

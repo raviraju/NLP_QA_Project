@@ -14,10 +14,11 @@ class babiGraph():
         self.G=nx.Graph()
         self.corenlp = StanfordCoreNLP("http://localhost:9000")
     def subStoryCheck(self,fact):
-        if(fact==1):
+        if(fact is 1):
+            print("SUBSTORY BLOCK")
             print("New Story Detected")
             print("The Following graph is for this substory and it will be cleared. ")
-            self.displayGraph()
+           # self.displayGraph()
             self.G.clear()
     def question(self,subStory):
         print(subStory)
@@ -42,11 +43,23 @@ class babiGraph():
             return objectLocationNode
         else:
             pass
-    def traverseGraph(self,node):
+    def writeResults(self,ans,QJSON,TS):
+        QJSON['PANS']=ans
+        QJSON['PSUPPFACT']=TS
+        with open("/home/aditya/newJavaSpace/babI/Tests/outputResults/outPutResults.jl", "a+") as textFile:
+            json.dump(QJSON,textFile)
+            textFile.write("\n")
+        pass
+    def traverseGraph(self,node,QJsonObj):
         QEdgeAttribute = dict()
         sampleDict=dict()
         neigh = self.G.neighbors(node)
         lemmaDict = {}
+        locationSet = set(["go","travel","journey","move"])
+        locationDict = {}
+        objectSet = set(["football","apple","milk","move"])
+        objectDict = {}
+        
         for neighborNode in neigh:
             uvEdge=(neighborNode,node)
             u=uvEdge[0]
@@ -59,14 +72,42 @@ class babiGraph():
                    lemmaDict[Lemma][TS] = neighborNode
                else:
                    lemmaDict[Lemma] = {TS : neighborNode}
-        #print(lemmaDict)
-        lemmaChoice = input("Enter lemma type : {}\n".format(lemmaDict.keys()))
-        choices = lemmaDict.get(lemmaChoice,None)
+        print(lemmaDict)
+        #differenciate bw lemmas
+        for lemma in lemmaDict:
+            finalResultDict=dict()
+            if lemma in locationSet:
+                tsKeys = lemmaDict[lemma].keys()
+                #print(tsKeys, type(tsKeys))
+                for ts in tsKeys:
+                    #print(ts)
+                    location = lemmaDict[lemma][ts]
+                    locationDict[ts] = location
+                    finalResultDict=locationDict
+            if lemma in objectSet:
+                tsKeys = lemmaDict[lemma].keys()
+                #print(tsKeys, type(tsKeys))
+                for ts in tsKeys:
+                    #print(ts)
+                    object = lemmaDict[lemma][ts]
+                    objectDict[ts] = location
+                    finalResultDict=objectDict
+        timeStamps = finalResultDict.keys()
+        latestTimeStamp = max(timeStamps, key=int)
+        answer = finalResultDict[latestTimeStamp]
+        #print(answer,QJsonObj,latestTimeStamp)
+        if(QJsonObj['Sentence']=="Where is John? "):
+            #self.displayGraph()
+            pass
+        self.writeResults(answer, QJsonObj, latestTimeStamp)
+        #lemmaChoice = input("Enter lemma type : {}\n".format(lemmaDict))
+        #choices = lemmaDict.get(lemmaChoice,None)
         #print(choices)
-        if choices:
-            timeStamps = choices.keys()
-            latestTimeStamp = max(timeStamps, key=int)
-            print("Answer is " + choices[latestTimeStamp])
+        #if choices:
+        #    timeStamps = choices.keys()
+        #    latestTimeStamp = max(timeStamps, key=int)
+            #print("Answer is " + choices[latestTimeStamp])
+        #    print(question+"\t"+choices[latestTimeStamp]+"\t"+str(latestTimeStamp))
     def processQuestion(self,output):
         originalText = ""
         resultDict = dict()
@@ -90,27 +131,28 @@ class babiGraph():
 
 if __name__ == "__main__":
     babiGraphObj = babiGraph()
-    with io.open("/home/aditya/newJavaSpace/babI/babiLemma/NER_TEXT_sample.jl") as data_file:   
+    with io.open("/home/aditya/newJavaSpace/babI/babiLemma/NER_TEXT.jl") as data_file:   
         for line in data_file:
             jsonObj = json.loads(line)
             fact=jsonObj["SNO"]
-            fact=fact[0]
-            babiGraphObj.subStoryCheck(int(fact))
-            if(jsonObj["Sentence"].startswith(" Where")):
+            #fact=fact[0]
+            babiGraphObj.subStoryCheck(fact)
+            #print(jsonObj["isFact"],type(jsonObj["isFact"]))
+            if(jsonObj["isFact"] is False):
                 #print(jsonObj["Sentence"])
                 #question=babiGraphObj.question(subStory)
-                print(subStory)
+                #print(subStory)
                 question = jsonObj["Sentence"]
+                print(question)
                 annotedQuestion=babiGraphObj.annotateQuestion(question)
                 QDict=babiGraphObj.processQuestion(annotedQuestion)
                 QNode=babiGraphObj.analyzeQuestion(QDict)
-                babiGraphObj.traverseGraph(QNode)
+                babiGraphObj.traverseGraph(QNode,jsonObj)
             else:
                 sentence = jsonObj["Sentence"]
                 node1=jsonObj["POS_NN"]
                 node2=jsonObj["POS_NNP"]
                 lemma=str(jsonObj["Lemma_Verb"])
-                #print(lemma)
                 edgeAttribute=dict()
                 edgeAttribute[fact]=lemma
                 edge=(node1,node2,edgeAttribute)

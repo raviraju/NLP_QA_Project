@@ -1,9 +1,9 @@
 #ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ python word2vec_cluster.py input/qa1_single-supporting-fact_train_factsOnly.txt 
 #Word2Vec model is stored in models/word2vec_model_qa1_single-supporting-fact_train_factsOnly
-#Clusters computed are stored in clusters/cluster_qa1_single-supporting-fact_train_factsOnly.json
+#Clusters computed are stored in clusters/qa1_single-supporting-fact_train_factsOnly_cluster.json
 #ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ python word2vec_cluster.py input/qa2_two-supporting-facts_train_factsOnly.txt 
 #Word2Vec model is stored in models/word2vec_model_qa2_two-supporting-facts_train_factsOnly
-#Clusters computed are stored in clusters/cluster_qa2_two-supporting-facts_train_factsOnly.json
+#Clusters computed are stored in clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json
 #ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ 
 
 import argparse, json, os
@@ -133,7 +133,7 @@ def main():
     clustersComputed = clusterWordEmbeddings(factFile, verboseMode)
     
     #pprint(clustersComputed)
-    clusterFileName = "clusters/cluster_" + getFileNamePart(factFile) + ".json"
+    clusterFileName = "clusters/" + getFileNamePart(factFile) + "_cluster.json"
     with open(clusterFileName, 'w') as outfile:
         json.dump(clustersComputed, outfile, indent=4)
     print("Clusters computed are stored in {}".format(clusterFileName))

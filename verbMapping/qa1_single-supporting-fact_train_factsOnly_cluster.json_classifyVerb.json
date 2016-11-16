@@ -1,0 +1,24 @@
+{
+    "verb_2": {
+        "set_B": [
+            "bathroom",
+            "kitchen",
+            "bedroom",
+            "office",
+            "garden",
+            "hallway"
+        ],
+        "data": [
+            "went",
+            "travelled",
+            "moved",
+            "journeyed"
+        ],
+        "set_A": [
+            "Sandra",
+            "Daniel",
+            "Mary",
+            "John"
+        ]
+    }
+}

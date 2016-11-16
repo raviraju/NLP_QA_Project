@@ -1,0 +1,50 @@
+{
+    "verb_4": {
+        "data": [
+            "moved",
+            "back",
+            "went",
+            "travelled",
+            "journeyed"
+        ],
+        "set_A": [
+            "Sandra",
+            "Daniel",
+            "John",
+            "Mary"
+        ],
+        "set_B": [
+            "office",
+            "kitchen",
+            "bathroom",
+            "bedroom",
+            "garden",
+            "hallway"
+        ]
+    },
+    "verb_0": {
+        "data": [
+            "got",
+            "grabbed",
+            "left",
+            "discarded",
+            "dropped",
+            "put",
+            "took",
+            "up",
+            "down",
+            "picked"
+        ],
+        "set_A": [
+            "Sandra",
+            "Daniel",
+            "John",
+            "Mary"
+        ],
+        "set_B": [
+            "apple",
+            "milk",
+            "football"
+        ]
+    }
+}

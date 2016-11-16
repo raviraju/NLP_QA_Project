@@ -16,7 +16,7 @@
                       #'office',
                       #'garden',
                       #'hallway']}}
-#Results found in verbMapping/qa1_single-supporting-fact_train_factsOnly_cluster.json_classifyVerb.json
+#Results found in verbMapping/qa1_single-supporting-fact_train_factsOnly_cluster_classifyVerb.json
 #ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ 
 
 
@@ -29,7 +29,7 @@ def getFileNamePart(fileName,stripText):
     return basename(fileName).strip(stripText)
 
 def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
-    classifyVerbFileName = getFileNamePart(clusters_factFile, '.txt') + "_classifyVerb.json"
+    classifyVerbFileName = getFileNamePart(clusters_factFile, '.json') + "_classifyVerb.json"
     clustersDict = {}
     entityClusterDict = {}
     with open(clusters_factFile, 'r') as clusters_File:

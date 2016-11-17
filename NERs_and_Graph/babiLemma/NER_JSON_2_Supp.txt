@@ -1,0 +1,759 @@
+{
+    "1": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "hallway",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "journeyed",
+        "SNO": "1",
+        "Sentence": "Sandra journeyed to the hallway",
+        "isFact": true
+    },
+    "10": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "bedroom",
+        "POS_NNP": "John",
+        "POS_Verb": "journeyed",
+        "SNO": "10",
+        "Sentence": "John journeyed to the bedroom",
+        "isFact": true
+    },
+    "11": {
+        "Lemma_Verb": "be",
+        "POS_NN": "football",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "11",
+        "Sentence": "Where is the football? ",
+        "answer": "bedroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "9",
+            "10"
+        ]
+    },
+    "12": {
+        "Lemma_Verb": "take",
+        "POS_NN": "apple",
+        "POS_NNP": "John",
+        "POS_Verb": "took",
+        "SNO": "12",
+        "Sentence": "John took the apple there",
+        "isFact": true
+    },
+    "13": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "travelled",
+        "SNO": "13",
+        "Sentence": "Sandra travelled to the bathroom",
+        "isFact": true
+    },
+    "14": {
+        "Lemma_Verb": "be",
+        "POS_NN": "football",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "14",
+        "Sentence": "Where is the football? ",
+        "answer": "bedroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "9",
+            "10"
+        ]
+    },
+    "15": {
+        "Lemma_Verb": "drop",
+        "POS_NN": "football",
+        "POS_NNP": "John",
+        "POS_Verb": "dropped",
+        "SNO": "15",
+        "Sentence": "John dropped the football",
+        "isFact": true
+    },
+    "16": {
+        "Lemma_Verb": "take",
+        "POS_NN": "football",
+        "POS_NNP": "John",
+        "POS_Verb": "took",
+        "SNO": "16",
+        "Sentence": "John took the football there",
+        "isFact": true
+    },
+    "17": {
+        "Lemma_Verb": "get",
+        "POS_NN": "milk",
+        "POS_NNP": "Mary",
+        "POS_Verb": "got",
+        "SNO": "17",
+        "Sentence": "Mary got the milk there",
+        "isFact": true
+    },
+    "18": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "hallway",
+        "POS_NNP": "Mary",
+        "POS_Verb": "journeyed",
+        "SNO": "18",
+        "Sentence": "Mary journeyed to the hallway",
+        "isFact": true
+    },
+    "19": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "19",
+        "Sentence": "Where is the milk? ",
+        "answer": "hallway",
+        "isFact": false,
+        "supportingFactNos": [
+            "17",
+            "18"
+        ]
+    },
+    "2": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "went",
+        "SNO": "2",
+        "Sentence": "Sandra went back to the office",
+        "isFact": true
+    },
+    "20": {
+        "Lemma_Verb": "go",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Mary",
+        "POS_Verb": "went",
+        "SNO": "20",
+        "Sentence": "Mary went to the bathroom",
+        "isFact": true
+    },
+    "21": {
+        "Lemma_Verb": "put",
+        "POS_NN": "milk",
+        "POS_NNP": "Mary",
+        "POS_Verb": "put",
+        "SNO": "21",
+        "Sentence": "Mary put down the milk",
+        "isFact": true
+    },
+    "22": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "22",
+        "Sentence": "Where is the milk? ",
+        "answer": "bathroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "21",
+            "20"
+        ]
+    },
+    "23": {
+        "Lemma_Verb": "get",
+        "POS_NN": "milk",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "got",
+        "SNO": "23",
+        "Sentence": "Sandra got the milk there",
+        "isFact": true
+    },
+    "24": {
+        "Lemma_Verb": "put",
+        "POS_NN": "football",
+        "POS_NNP": "John",
+        "POS_Verb": "put",
+        "SNO": "24",
+        "Sentence": "John put down the football there",
+        "isFact": true
+    },
+    "25": {
+        "Lemma_Verb": "be",
+        "POS_NN": "football",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "25",
+        "Sentence": "Where is the football? ",
+        "answer": "bedroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "24",
+            "10"
+        ]
+    },
+    "26": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "went",
+        "SNO": "26",
+        "Sentence": "Sandra went back to the office",
+        "isFact": true
+    },
+    "27": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "27",
+        "Sentence": "Where is the milk? ",
+        "answer": "bedroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "22",
+            "20"
+        ]
+    },
+    "28": {
+        "Lemma_Verb": "take",
+        "POS_NN": "milk",
+        "POS_NNP": "Mary",
+        "POS_Verb": "took",
+        "SNO": "28",
+        "Sentence": "Mary took the milk there",
+        "isFact": true
+    },
+    "29": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Mary",
+        "POS_Verb": "travelled",
+        "SNO": "29",
+        "Sentence": "Mary travelled to the bathroom",
+        "isFact": true
+    },
+    "3": {
+        "Lemma_Verb": "go",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "went",
+        "SNO": "3",
+        "Sentence": "Daniel went to the bathroom",
+        "isFact": true
+    },
+    "30": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "30",
+        "Sentence": "Where is the milk? ",
+        "answer": "bathroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "28",
+            "29"
+        ]
+    },
+    "31": {
+        "Lemma_Verb": "go",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "went",
+        "SNO": "31",
+        "Sentence": "Sandra went to the bathroom",
+        "isFact": true
+    },
+    "32": {
+        "Lemma_Verb": "leave",
+        "POS_NN": "milk",
+        "POS_NNP": "Mary",
+        "POS_Verb": "left",
+        "SNO": "32",
+        "Sentence": "Mary left the milk",
+        "isFact": true
+    },
+    "33": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "33",
+        "Sentence": "Where is the milk? ",
+        "answer": "bathroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "32",
+            "29"
+        ]
+    },
+    "34": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "journeyed",
+        "SNO": "34",
+        "Sentence": "Sandra journeyed to the kitchen",
+        "isFact": true
+    },
+    "35": {
+        "Lemma_Verb": "go",
+        "POS_NN": "hallway",
+        "POS_NNP": "Mary",
+        "POS_Verb": "went",
+        "SNO": "35",
+        "Sentence": "Mary went back to the hallway",
+        "isFact": true
+    },
+    "36": {
+        "Lemma_Verb": "move",
+        "POS_NN": "office",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "moved",
+        "SNO": "36",
+        "Sentence": "Daniel moved to the office",
+        "isFact": true
+    },
+    "37": {
+        "Lemma_Verb": "go",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "went",
+        "SNO": "37",
+        "Sentence": "Daniel went back to the kitchen",
+        "isFact": true
+    },
+    "38": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "John",
+        "POS_Verb": "went",
+        "SNO": "38",
+        "Sentence": "John went back to the office",
+        "isFact": true
+    },
+    "39": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "travelled",
+        "SNO": "39",
+        "Sentence": "Daniel travelled to the bathroom",
+        "isFact": true
+    },
+    "4": {
+        "Lemma_Verb": "move",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "moved",
+        "SNO": "4",
+        "Sentence": "Sandra moved to the bedroom",
+        "isFact": true
+    },
+    "40": {
+        "Lemma_Verb": "leave",
+        "POS_NN": "football",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "left",
+        "SNO": "40",
+        "Sentence": "Sandra left the football",
+        "isFact": true
+    },
+    "41": {
+        "Lemma_Verb": "be",
+        "POS_NN": "football",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "41",
+        "Sentence": "Where is the football? ",
+        "answer": "kitchen",
+        "isFact": false,
+        "supportingFactNos": [
+            "40",
+            "34"
+        ]
+    },
+    "42": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "42",
+        "Sentence": "Where is the milk? ",
+        "answer": "garden",
+        "isFact": false,
+        "supportingFactNos": [
+            "40",
+            "34"
+        ]
+    },
+    "43": {
+        "Lemma_Verb": "drop",
+        "POS_NN": "football",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "dropped",
+        "SNO": "43",
+        "Sentence": "Daniel dropped the football",
+        "isFact": true
+    },
+    "44": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "went",
+        "SNO": "44",
+        "Sentence": "Sandra went back to the office",
+        "isFact": true
+    },
+    "45": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "45",
+        "Sentence": "Where is the milk? ",
+        "answer": "garden",
+        "isFact": false,
+        "supportingFactNos": [
+            "40",
+            "34"
+        ]
+    },
+    "46": {
+        "Lemma_Verb": "take",
+        "POS_NN": "apple",
+        "POS_NNP": "John",
+        "POS_Verb": "took",
+        "SNO": "46",
+        "Sentence": "John took the apple there",
+        "isFact": true
+    },
+    "47": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "bathroom",
+        "POS_NNP": "John",
+        "POS_Verb": "journeyed",
+        "SNO": "47",
+        "Sentence": "John journeyed to the bathroom",
+        "isFact": true
+    },
+    "48": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "garden",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "travelled",
+        "SNO": "48",
+        "Sentence": "Daniel travelled to the garden",
+        "isFact": true
+    },
+    "49": {
+        "Lemma_Verb": "be",
+        "POS_NN": "apple",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "49",
+        "Sentence": "Where is the apple? ",
+        "answer": "bathroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "46",
+            "47"
+        ]
+    },
+    "5": {
+        "Lemma_Verb": "go",
+        "POS_NN": "garden",
+        "POS_NNP": "John",
+        "POS_Verb": "went",
+        "SNO": "5",
+        "Sentence": "John went back to the garden",
+        "isFact": true
+    },
+    "50": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "went",
+        "SNO": "50",
+        "Sentence": "Daniel went back to the office",
+        "isFact": true
+    },
+    "51": {
+        "Lemma_Verb": "put",
+        "POS_NN": "apple",
+        "POS_NNP": "John",
+        "POS_Verb": "put",
+        "SNO": "51",
+        "Sentence": "John put down the apple",
+        "isFact": true
+    },
+    "52": {
+        "Lemma_Verb": "be",
+        "POS_NN": "apple",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "52",
+        "Sentence": "Where is the apple? ",
+        "answer": "bathroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "51",
+            "47"
+        ]
+    },
+    "53": {
+        "Lemma_Verb": "get",
+        "POS_NN": "apple",
+        "POS_NNP": "John",
+        "POS_Verb": "got",
+        "SNO": "53",
+        "Sentence": "John got the apple there",
+        "isFact": true
+    },
+    "54": {
+        "Lemma_Verb": "drop",
+        "POS_NN": "apple",
+        "POS_NNP": "John",
+        "POS_Verb": "dropped",
+        "SNO": "54",
+        "Sentence": "John dropped the apple there",
+        "isFact": true
+    },
+    "55": {
+        "Lemma_Verb": "be",
+        "POS_NN": "apple",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "55",
+        "Sentence": "Where is the apple? ",
+        "answer": "bathroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "54",
+            "47"
+        ]
+    },
+    "56": {
+        "Lemma_Verb": "move",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "moved",
+        "SNO": "56",
+        "Sentence": "Sandra moved to the kitchen",
+        "isFact": true
+    },
+    "57": {
+        "Lemma_Verb": "pick",
+        "POS_NN": "milk",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "picked",
+        "SNO": "57",
+        "Sentence": "Daniel picked up the milk there",
+        "isFact": true
+    },
+    "58": {
+        "Lemma_Verb": "be",
+        "POS_NN": "apple",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "58",
+        "Sentence": "Where is the apple? ",
+        "answer": "bathroom",
+        "isFact": false,
+        "supportingFactNos": [
+            "54",
+            "47"
+        ]
+    },
+    "59": {
+        "Lemma_Verb": "leave",
+        "POS_NN": "milk",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "left",
+        "SNO": "59",
+        "Sentence": "Daniel left the milk there",
+        "isFact": true
+    },
+    "6": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Mary",
+        "POS_Verb": "travelled",
+        "SNO": "6",
+        "Sentence": "Mary travelled to the bedroom",
+        "isFact": true
+    },
+    "60": {
+        "Lemma_Verb": "move",
+        "POS_NN": "office",
+        "POS_NNP": "John",
+        "POS_Verb": "moved",
+        "SNO": "60",
+        "Sentence": "John moved to the office",
+        "isFact": true
+    },
+    "61": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "61",
+        "Sentence": "Where is the milk? ",
+        "answer": "office",
+        "isFact": false,
+        "supportingFactNos": [
+            "59",
+            "50"
+        ]
+    },
+    "62": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "62",
+        "Sentence": "Where is the milk? ",
+        "answer": "garden",
+        "isFact": false,
+        "supportingFactNos": [
+            "56",
+            "60"
+        ]
+    },
+    "63": {
+        "Lemma_Verb": "go",
+        "POS_NN": "kitchen",
+        "POS_NNP": "John",
+        "POS_Verb": "went",
+        "SNO": "63",
+        "Sentence": "John went to the kitchen",
+        "isFact": true
+    },
+    "64": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "hallway",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "travelled",
+        "SNO": "64",
+        "Sentence": "Daniel travelled to the hallway",
+        "isFact": true
+    },
+    "65": {
+        "Lemma_Verb": "put",
+        "POS_NN": "milk",
+        "POS_NNP": "Mary",
+        "POS_Verb": "put",
+        "SNO": "65",
+        "Sentence": "Mary put down the milk",
+        "isFact": true
+    },
+    "66": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "office",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "journeyed",
+        "SNO": "66",
+        "Sentence": "Daniel journeyed to the office",
+        "isFact": true
+    },
+    "67": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "67",
+        "Sentence": "Where is the milk? ",
+        "answer": "garden",
+        "isFact": false,
+        "supportingFactNos": [
+            "65",
+            "60"
+        ]
+    },
+    "68": {
+        "Lemma_Verb": "grab",
+        "POS_NN": "milk",
+        "POS_NNP": "Mary",
+        "POS_Verb": "grabbed",
+        "SNO": "68",
+        "Sentence": "Mary grabbed the milk there",
+        "isFact": true
+    },
+    "69": {
+        "Lemma_Verb": "go",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Mary",
+        "POS_Verb": "went",
+        "SNO": "69",
+        "Sentence": "Mary went to the kitchen",
+        "isFact": true
+    },
+    "7": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "went",
+        "SNO": "7",
+        "Sentence": "Sandra went back to the office",
+        "isFact": true
+    },
+    "70": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "70",
+        "Sentence": "Where is the milk? ",
+        "answer": "kitchen",
+        "isFact": false,
+        "supportingFactNos": [
+            "68",
+            "69"
+        ]
+    },
+    "71": {
+        "Lemma_Verb": "go",
+        "POS_NN": "bedroom",
+        "POS_NNP": "John",
+        "POS_Verb": "went",
+        "SNO": "71",
+        "Sentence": "John went back to the bedroom",
+        "isFact": true
+    },
+    "72": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "journeyed",
+        "SNO": "72",
+        "Sentence": "Sandra journeyed to the bathroom",
+        "isFact": true
+    },
+    "73": {
+        "Lemma_Verb": "be",
+        "POS_NN": "milk",
+        "POS_Verb": "is",
+        "POS_WRB": "Where",
+        "SNO": "73",
+        "Sentence": "Where is the milk? ",
+        "answer": "kitchen",
+        "isFact": false,
+        "supportingFactNos": [
+            "68",
+            "69"
+        ]
+    },
+    "8": {
+        "Lemma_Verb": "move",
+        "POS_NN": "kitchen",
+        "POS_NNP": "John",
+        "POS_Verb": "moved",
+        "SNO": "8",
+        "Sentence": "John moved to the kitchen",
+        "isFact": true
+    },
+    "9": {
+        "Lemma_Verb": "get",
+        "POS_NN": "football",
+        "POS_NNP": "John",
+        "POS_Verb": "got",
+        "SNO": "9",
+        "Sentence": "John got the football there",
+        "isFact": true
+    }
+}

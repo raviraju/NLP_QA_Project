@@ -18,19 +18,26 @@ def extractFact(factLine, outFile):
 	
 	
 def processData(trainingFilePath):
+	QAString=""
 	with open(trainingFilePath, 'r') as inFile:
 		factFileName = trainingFilePath.strip('.txt') + '_SingleFactsOnly.txt'
 		with open(factFileName, 'w') as outFile:
 			for line in inFile:
 				if '\t' in line:
 					#print(line[:line.index("?")+1])
-					line=line[:line.index("?")+1] +"\n"
-					extractFact(line, outFile)
+					normalLine=line[:line.index("?")+1] +"\n"
+					QAline=line[line.index(" "):len(line)]
+					extractFact(normalLine, outFile)
+					QAString+=QAline
 					#continue
 				else:
 					extractFact(line, outFile)
+	writeToQuestionFile(QAString,trainingFilePath)
 	print("Facts written to {}".format(factFileName))
-
+def writeToQuestionFile(QAline,trainingFilePath):
+	QAFileName = trainingFilePath.strip('.txt') + '_WhereActorOnly.txt'
+	with open(QAFileName, 'w') as outFile:
+		outFile.write(QAline)
 def main():
 	parser = argparse.ArgumentParser(description="process babi-task training dataset for buidling word embedding")
 	parser.add_argument("path", help="path to training data")

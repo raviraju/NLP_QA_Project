@@ -28,3 +28,18 @@
 {"SNO": "13", "POS_NN": "bedroom", "Sentence": "John went to the bedroom", "Lemma_Verb": "go", "POS_Verb": "went", "isFact": true, "POS_NNP": "John"}
 {"SNO": "14", "POS_NN": "office", "Sentence": "John travelled to the office", "Lemma_Verb": "travel", "POS_Verb": "travelled", "isFact": true, "POS_NNP": "John"}
 {"SNO": "15", "answer": "hallway", "POS_WRB": "Where", "Sentence": "Where is Daniel? ", "supportingFactNos": ["11"], "POS_Verb": "is", "isFact": false, "Lemma_Verb": "be", "POS_NNP": "Daniel"}
+{"SNO": "1", "POS_NN": "bedroom", "Sentence": "Mary went to the bedroom", "Lemma_Verb": "go", "POS_Verb": "went", "isFact": true, "POS_NNP": "Mary"}
+{"SNO": "2", "POS_NN": "bathroom", "Sentence": "John journeyed to the bathroom", "Lemma_Verb": "journey", "POS_Verb": "journeyed", "isFact": true, "POS_NNP": "John"}
+{"SNO": "3", "answer": "bathroom", "POS_WRB": "Where", "Sentence": "Where is John? ", "supportingFactNos": ["2"], "POS_Verb": "is", "isFact": false, "Lemma_Verb": "be", "POS_NNP": "John"}
+{"SNO": "4", "POS_NN": "hallway", "Sentence": "Sandra journeyed to the hallway", "Lemma_Verb": "journey", "POS_Verb": "journeyed", "isFact": true, "POS_NNP": "Sandra"}
+{"SNO": "5", "POS_NN": "garden", "Sentence": "John journeyed to the garden", "Lemma_Verb": "journey", "POS_Verb": "journeyed", "isFact": true, "POS_NNP": "John"}
+{"SNO": "6", "answer": "bedroom", "POS_WRB": "Where", "Sentence": "Where is Mary? ", "supportingFactNos": ["1"], "POS_Verb": "is", "isFact": false, "Lemma_Verb": "be", "POS_NNP": "Mary"}
+{"SNO": "7", "POS_NN": "bathroom", "Sentence": "John journeyed to the bathroom", "Lemma_Verb": "journey", "POS_Verb": "journeyed", "isFact": true, "POS_NNP": "John"}
+{"SNO": "8", "POS_NN": "garden", "Sentence": "Sandra journeyed to the garden", "Lemma_Verb": "journey", "POS_Verb": "journeyed", "isFact": true, "POS_NNP": "Sandra"}
+{"SNO": "9", "answer": "bathroom", "POS_WRB": "Where", "Sentence": "Where is John? ", "supportingFactNos": ["7"], "POS_Verb": "is", "isFact": false, "Lemma_Verb": "be", "POS_NNP": "John"}
+{"SNO": "10", "POS_NN": "bedroom", "Sentence": "Sandra went back to the bedroom", "Lemma_Verb": "go", "POS_Verb": "went", "isFact": true, "POS_NNP": "Sandra"}
+{"SNO": "11", "POS_NN": "bathroom", "Sentence": "Daniel travelled to the bathroom", "Lemma_Verb": "travel", "POS_Verb": "travelled", "isFact": true, "POS_NNP": "Daniel"}
+{"SNO": "12", "answer": "bathroom", "POS_WRB": "Where", "Sentence": "Where is John? ", "supportingFactNos": ["7"], "POS_Verb": "is", "isFact": false, "Lemma_Verb": "be", "POS_NNP": "John"}
+{"SNO": "13", "POS_NN": "office", "Sentence": "John went to the office", "Lemma_Verb": "go", "POS_Verb": "went", "isFact": true, "POS_NNP": "John"}
+{"SNO": "14", "POS_NN": "office", "Sentence": "Mary moved to the office", "Lemma_Verb": "move", "POS_Verb": "moved", "isFact": true, "POS_NNP": "Mary"}
+{"SNO": "15", "answer": "bedroom", "POS_WRB": "Where", "Sentence": "Where is Sandra? ", "supportingFactNos": ["10"], "POS_Verb": "is", "isFact": false, "Lemma_Verb": "be", "POS_NNP": "Sandra"}

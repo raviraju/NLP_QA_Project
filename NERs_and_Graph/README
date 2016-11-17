@@ -11,21 +11,21 @@ Detailed Explanation of each folders
 
 1. babiLemma
    a. babiLemma_working.py is the Python script that takes the input task file, generates the POS using Stanford Core NLP and builds the enriched JSON for future processing. 
-   b. Input file requried is placed in the folder /babI/Tests/finalLemmaTestFile
-   c. Output file is at the location /babI/babiLemma/ with name NER_TEXT.jl. 
-   d. This NER_TEXT.jl has the enriched JSON which identifies each POS, facts, questions and serial number. 
+   b. Input file requried is placed in the folder /babI/Tests/babiLemmaInputFile/
+   c. Output file is at the location /babI/Tests/outputResultsLemma/ with name NER_TEXT_1_Supp.jl. 
+   d. This NER_TEXT_1_Supp.jl has the enriched JSON which identifies each POS, facts, questions and serial number. 
 
 2. babiGraph
-	a. newBabiGraph.py is the Python script that reads the output of previous step viz. NER_TEXT.jl and builds the graph for evey story. 
+	a. newBabiGraph.py is the Python script that reads the output of previous step viz. NER_TEXT_1_Supp.jl and builds the graph for evey story. 
 	b. Whenever a question is asked, the script traverses the graph and gets the correct answer based on the time stamp and classification. 
 	c. Whenver a new story is detected, the previous old story or graph is cleared. 
-	d. Input file is  /babI/babiLemma/NER_TEXT.jl
-	e. Output file is generated at /babI/Tests/outputResults/outPutResults.jl
+	d. Input file is  /babI/Tests/outputResultsLemma/NER_TEXT_1_Supp.jl
+	e. Output file is generated at /babI/Tests/outputResultsGraph/outPutResults.jl
 3. Evaluation 
 	a. The Python script /babI/babiGraph/evaluate.py evaluates the output of babiGraph step viz outPutResults.jl
-	b. The number of correct answers as per our prediction and as per the dataset is provided at /babI/Tests/outputResults/evaluate.txt
+	b. The number of correct answers as per our prediction and as per the dataset is provided at /babI/Tests/outputResultsGraph/evaluate.txt
 
 
 Few things to note:
 1. Stanford Core NLP server needs to be running on the port number 9000
-2. The paths as per now are hard-coded in the scripts and are realtive to my work environment, feel free to modify them as per your needs. Usually you can find the path in Globals.py or in the actual script of the source folder. 
+2. The paths as per now are hard-coded in the scripts and are realtive to my work environment, feel free to modify them as per your needs. Usually you can find the path in Globals.py.

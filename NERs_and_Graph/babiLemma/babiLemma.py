@@ -22,21 +22,45 @@ class babiLemma(object):
             for presentFile in files:
                 filePath = os.path.join(root, presentFile)
                 with io.open(filePath, "r") as sFile:
-                    for textLine in sFile: 
-                        factNum=re.findall(r'\d+',textLine)
-                        textLine=''.join([i for i in textLine if not i.isdigit()])
-                        output = self.corenlp.annotate(textLine, properties=props)
-                        self.parseOutput(factNum,textLine, output)
-    def parseOutput(self,factNum,textLine, output):
+                    for textLine in sFile:
+                        if '\t' in textLine:#question
+                            questionList = textLine.split('\t')
+                            #print(questionList)
+                            sNo_question = questionList[0]
+                            sNo_questionList = sNo_question.split(' ')
+                            sNo = sNo_questionList[0]
+                            del sNo_questionList[0]
+                            question = ' '.join(sNo_questionList)
+                            output = self.corenlp.annotate(question, properties=props)
+                            answer = questionList[1]
+                            supportingFacts = questionList[2]
+                            supportingFactNos = supportingFacts.strip("\n").split(' ')
+                            self.parseOutput(sNo,question, output, False, answer, supportingFactNos)
+                        else:#fact
+                            factList = textLine.split(' ')
+                            #print(factList) 
+                            sNo = factList[0]
+                            del factList[0]
+                            fact = ' '.join(factList).replace('.\n','')
+                            #print(fact)
+                            output = self.corenlp.annotate(fact, properties=props)
+                            self.parseOutput(sNo,fact, output, True)
+                            
+    def parseOutput(self,sNo,textLine, output, isFact, answer=None, supportingFactNos=None):
         resString = ""
         originalText = ""
         lemma = ""
         resultDict = dict()
-        resultDict['Sentence'] = textLine.strip("\n")
+        resultDict['Sentence'] = textLine#.strip("\n")
         for sentence in output['sentences']:
             for tok in sentence['tokens']:
                 originalText = tok['originalText']
-                resultDict['SNO'] = factNum
+                resultDict['SNO'] = sNo
+                resultDict['isFact'] = isFact
+                if answer:
+                    resultDict['answer'] = answer
+                if supportingFactNos:
+                    resultDict['supportingFactNos'] = supportingFactNos
                 if(tok['pos'] == 'VBD' or tok['pos'] == 'VB' or tok['pos'] == 'VBG' or tok['pos'] == 'VBN'or tok['pos'] == 'VBP'or tok['pos'] == 'VBZ'):
                     #resString += "\"POS_Verb\": [" + originalText+"],"
                     lemma +=tok['lemma']
@@ -56,7 +80,7 @@ class babiLemma(object):
             json.dump(resultDict,textFile)
             textFile.write("\n")
         string1 = json.dumps(resultDict, indent=4, sort_keys=True)
-        self.tempDict[factNum[0]] = resultDict
+        self.tempDict[sNo] = resultDict
                 
     def writeToFile(self, str, json):
         if(json == "TRUE"):

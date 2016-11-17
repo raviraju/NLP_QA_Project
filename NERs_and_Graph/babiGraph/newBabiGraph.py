@@ -4,6 +4,7 @@ import json
 import io
 import matplotlib.pyplot as plt
 from pycorenlp import StanfordCoreNLP
+from Globals import Globals
 from networkx.classes.function import neighbors
 
 class babiGraph():
@@ -12,7 +13,7 @@ class babiGraph():
         self.nodeList=[]
         self.timeStampLemmaDict = dict()
         self.G=nx.Graph()
-        self.corenlp = StanfordCoreNLP("http://localhost:9000")
+        self.corenlp = StanfordCoreNLP(Globals.CORENLP_SERVER)
     def subStoryCheck(self,fact):
         
         if(fact is "1"):
@@ -49,7 +50,7 @@ class babiGraph():
     def writeResults(self,ans,QJSON,TS):
         QJSON['PANS']=ans
         QJSON['PSUPPFACT']=TS
-        with open("/home/aditya/newJavaSpace/babI/Tests/outputResults/outPutResults.jl", "a+") as textFile:
+        with open(Globals.OUTPUT_GRAPH_FILE, "a+") as textFile:
             json.dump(QJSON,textFile)
             textFile.write("\n")
         pass
@@ -128,7 +129,7 @@ class babiGraph():
 
 if __name__ == "__main__":
     babiGraphObj = babiGraph()
-    with io.open("/home/aditya/newJavaSpace/babI/babiLemma/NER_TEXT.jl") as data_file:   
+    with io.open(Globals.NERTEXT_FILE) as data_file:   
         for line in data_file:
             jsonObj = json.loads(line)
             fact=jsonObj["SNO"]

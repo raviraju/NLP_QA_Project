@@ -27,5 +27,6 @@ Detailed Explanation of each folders
 
 
 Few things to note:
-1. Stanford Core NLP server needs to be running on the port number 9000
+1. Stanford Core NLP server needs to be running on the port number 9000 using java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer 9000
 2. The paths as per now are hard-coded in the scripts and are realtive to my work environment, feel free to modify them as per your needs. Usually you can find the path in Globals.py.
+3. Images folder has the images how exactly the graph is being built for first 24 stories. 

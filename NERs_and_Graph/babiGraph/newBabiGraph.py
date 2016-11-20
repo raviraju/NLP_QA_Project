@@ -2,10 +2,13 @@ import networkx as nx
 import collections
 import json
 import io
+import os
+import sys
 import matplotlib.pyplot as plt
 from pycorenlp import StanfordCoreNLP
 from Globals import Globals
 from networkx.classes.function import neighbors
+
 
 class babiGraph():
     def __init__(self):
@@ -13,6 +16,7 @@ class babiGraph():
         self.nodeList=[]
         self.timeStampLemmaDict = dict()
         self.G=nx.Graph()
+        self.storyNum=0
         self.corenlp = StanfordCoreNLP(Globals.CORENLP_SERVER)
     def subStoryCheck(self,fact):
         
@@ -20,6 +24,7 @@ class babiGraph():
             print("SUBSTORY BLOCK")
             print("New Story Detected")
             print("The Following graph is for this substory and it will be cleared. ")
+            self.storyNum+=1
             #q = input("\nEnter q to clear graph"+"\n")
             #if(q is "q"):
             #self.displayGraph()
@@ -106,9 +111,11 @@ class babiGraph():
         #    latestTimeStamp = max(timeStamps, key=int)
             #print("Answer is " + choices[latestTimeStamp])
         #    print(question+"\t"+choices[latestTimeStamp]+"\t"+str(latestTimeStamp))
-    def processQuestion(self,output):
+    def processQuestion(self,output,que):
         originalText = ""
         resultDict = dict()
+        print("Question asked is " +que )
+        #self.displayGraph()
         for sentence in output['sentences']:
             for tok in sentence['tokens']:
                 originalText = tok['originalText']
@@ -126,7 +133,21 @@ class babiGraph():
     def displayGraph(self):
         nx.draw(self.G,with_labels=True)
         plt.show()
-
+    def saveGraph(self,name):
+        plt.clf()
+        if self.storyNum < 25:
+#             self.G.node[qNode]['color']='blue'
+#             pos = nx.spring_layout(self.G)
+#             nx.draw_networkx_nodes(self.G, pos=pos, nodelist = self.G.nodes())
+#             nx.draw_networkx_edges(self.G, pos=pos, edgelist = self.G.edges())
+#             nx.draw_networkx_labels(self.G, pos=pos)
+            nx.draw(self.G,with_labels=True)
+            dirName=str(self.storyNum)
+            dirName=os.path.join(Globals.IMAGE_DIR, dirName)
+            if not os.path.exists(dirName):
+                os.makedirs(dirName)
+            fName=name    
+            plt.savefig(dirName+"/"+fName+".png")
 if __name__ == "__main__":
     babiGraphObj = babiGraph()
     with io.open(Globals.NERTEXT_FILE) as data_file:   
@@ -136,15 +157,12 @@ if __name__ == "__main__":
             babiGraphObj.subStoryCheck(fact)
             #print(jsonObj["isFact"],type(jsonObj["isFact"]))
             if(jsonObj["isFact"] is False):
-                #print(jsonObj["Sentence"])
-                #question=babiGraphObj.question(subStory)
-                #print(subStory)
                 question = jsonObj["Sentence"]
-                #print(question)
                 annotedQuestion=babiGraphObj.annotateQuestion(question)
-                QDict=babiGraphObj.processQuestion(annotedQuestion)
+                QDict=babiGraphObj.processQuestion(annotedQuestion,question)
                 QNode=babiGraphObj.analyzeQuestion(QDict)
                 babiGraphObj.traverseGraph(QNode,jsonObj)
+                
             else:
                 sentence = jsonObj["Sentence"]
                 node1=jsonObj["POS_NN"]
@@ -153,6 +171,9 @@ if __name__ == "__main__":
                 edgeAttribute=dict()
                 edgeAttribute[fact]=lemma
                 edge=(node1,node2,edgeAttribute)
-                babiGraphObj.G.add_node(node1)
+                babiGraphObj.G.add_node(node1)#,color='red',style='filled',fillcolor='blue',shape='square'
                 babiGraphObj.G.add_node(node2)
                 babiGraphObj.G.add_edge(node1,node2,edgeAttribute)
+                babiGraphObj.saveGraph(fact)
+                
+                sys.exit

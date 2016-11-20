@@ -38,14 +38,14 @@ class babiLemma(object):
                             self.parseOutput(sNo,question, output, False, answer, supportingFactNos)
                         else:#fact
                             factList = textLine.split(' ')
-                            #print(factList) 
+                            #print(factList)
                             sNo = factList[0]
                             del factList[0]
                             fact = ' '.join(factList).replace('.\n','')
                             #print(fact)
                             output = self.corenlp.annotate(fact, properties=props)
                             self.parseOutput(sNo,fact, output, True)
-                            
+
     def parseOutput(self,sNo,textLine, output, isFact, answer=None, supportingFactNos=None):
         resString = ""
         originalText = ""
@@ -81,14 +81,14 @@ class babiLemma(object):
             textFile.write("\n")
         string1 = json.dumps(resultDict, indent=4, sort_keys=True)
         self.tempDict[sNo] = resultDict
-                
+
     def writeToFile(self, str, json):
         if(json == "TRUE"):
             with open(GlobalsClass.JSON_FILE, "a+") as textFile:
                 textFile.write(str)
-        elif(json == "FALSE"):   
+        elif(json == "FALSE"):
             with open(GlobalsClass.NERTEXT_FILE, "a+") as textFile:
-               textFile.write(self.writeString) 
+               textFile.write(self.writeString)
 
 if __name__ == "__main__":
     babiLemma = babiLemma()
@@ -96,4 +96,3 @@ if __name__ == "__main__":
     jsonString = json.dumps(babiLemma.tempDict, indent=4, sort_keys=True)
     babiLemma.writeToFile(jsonString, "TRUE")
     print("Done")
-    

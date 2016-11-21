@@ -1,22 +1,67 @@
-#ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ python34 classifyVerbLemma.py input/qa1_single-supporting-fact_train_POS_Lemma.jl clusters/qa1_single-supporting-fact_train_factsOnly_cluster.json 
+#ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ python34 classifyVerbLemma.py input/qa6_yes-no-questions_train_POS_Lemma.jl clusters/qa6_yes-no-questions_train_factsOnly_cluster.json 
 #Reading Clusters...
-#{'0': ['Sandra', 'Daniel', 'Mary', 'John'],
- #'1': ['bathroom', 'kitchen', 'bedroom', 'office', 'garden', 'hallway'],
- #'2': ['went', 'travelled', 'moved', 'journeyed'],
- #'3': ['the', 'back'],
- #'4': []}
+#{'0': ['hallway', 'bedroom', 'office', 'kitchen', 'garden', 'bathroom'],
+ #'1': ['left',
+       #'dropped',
+       #'got',
+       #'picked',
+       #'discarded',
+       #'down',
+       #'took',
+       #'up',
+       #'put',
+       #'grabbed'],
+ #'2': ['journeyed', 'to', 'travelled', 'went', 'back', 'moved'],
+ #'3': ['apple', 'football', 'milk', 'there'],
+ #'4': ['Daniel', 'the', 'John', 'Sandra', 'Mary']}
 #Cluster Mapping Relation
-#{'2': {'0:1'}}
+#{'1': {'4:3'}, '2': {'4:0'}}
 
-#{'verb_2': {'data': ['went', 'travelled', 'moved', 'journeyed'],
-            #'set_A': ['Sandra', 'Daniel', 'Mary', 'John'],
-            #'set_B': ['bathroom',
-                      #'kitchen',
+#{'verb_1': {'data': ['left',
+                     #'dropped',
+                     #'got',
+                     #'picked',
+                     #'discarded',
+                     #'down',
+                     #'took',
+                     #'up',
+                     #'put',
+                     #'grabbed'],
+            #'lemma_data': ['leave',
+                           #'drop',
+                           #'get',
+                           #'pick',
+                           #'discard',
+                           #'take',
+                           #'put',
+                           #'grab'],
+            #'set_A': ['Daniel', 'the', 'John', 'Sandra', 'Mary'],
+            #'set_B': ['apple', 'football', 'milk', 'there']},
+ #'verb_2': {'data': ['journeyed', 'to', 'travelled', 'went', 'back', 'moved'],
+            #'lemma_data': ['journey', 'travel', 'go', 'move'],
+            #'set_A': ['Daniel', 'the', 'John', 'Sandra', 'Mary'],
+            #'set_B': ['hallway',
                       #'bedroom',
                       #'office',
+                      #'kitchen',
                       #'garden',
-                      #'hallway']}}
-#Results found in verbMapping/qa1_single-supporting-fact_train_factsOnly_cluster_classifyVerb.json
+                      #'bathroom']}}
+#Results found in verbMapping/qa6_yes-no-questions_train_factsOnly_cluster_classifyVerb.json
+#Provide a className for following set of verbs
+#Provide a className (o : objectVerbs, l : locationVerbs, anyOtheName) for set of verbs : ['journey', 'travel', 'go', 'move']
+#l
+#Provide a className for following set of verbs
+#Provide a className (o : objectVerbs, l : locationVerbs, anyOtheName) for set of verbs : ['leave', 'drop', 'get', 'pick', 'discard', 'take', 'put', 'grab']
+#o
+#{'locationVerbs': ['journey', 'travel', 'go', 'move'],
+ #'objectVerbs': ['leave',
+                 #'drop',
+                 #'get',
+                 #'pick',
+                 #'discard',
+                 #'take',
+                 #'put',
+                 #'grab']}
 #ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ 
 
 
@@ -35,9 +80,27 @@ def getLemmaVerbData(posLemmaVerbDict, verbData):
         if lemmaVerb:
             lemmaVerbs.append(lemmaVerb)
     return lemmaVerbs
-    
+
+def annotateVerbs(resultDict, annotatedVerbFileName):
+    annotatedVerbDict = {}
+    for verb in resultDict:
+        print("Provide a className for following set of verbs")
+        className = input("Provide a className (o : objectVerbs, l : locationVerbs, anyOtheName) for set of verbs : {}\n".format(resultDict[verb]["lemma_data"]))
+        if className == "o":
+            annotatedVerbDict["objectVerbs"] = resultDict[verb]["lemma_data"]
+        elif className == "l":
+            annotatedVerbDict["locationVerbs"] = resultDict[verb]["lemma_data"]
+        else:
+            annotatedVerbDict[className] = resultDict[verb]["lemma_data"]
+    pprint(annotatedVerbDict)
+    annotatedVerbFilePath = "annotatedVerbs/" + annotatedVerbFileName
+    with open(annotatedVerbFilePath, 'w') as outFile:
+        json.dump(annotatedVerbDict, outFile, indent=4)
+
+
 def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
     classifyVerbFileName = getFileNamePart(clusters_factFile, '.json') + "_classifyVerb.json"
+    annotatedVerbFileName = getFileNamePart(clusters_factFile, '.json') + "_annotatedVerb.json"
     clustersDict = {}
     entityClusterDict = {}
     with open(clusters_factFile, 'r') as clusters_File:
@@ -106,6 +169,8 @@ def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
     with open(resultFilePath, 'w') as outFile:
         json.dump(resultDict, outFile, indent=4)
     print("Results found in {}".format(resultFilePath))
+    
+    annotateVerbs(resultDict, annotatedVerbFileName)
 
 def main():
     parser = argparse.ArgumentParser(description="classify lemma verb actions into categories based on entities they connect")

@@ -1,20 +1,26 @@
 {
-    "verb_1": {
-        "lemma_data": [
-            "leave",
-            "drop",
-            "get",
-            "pick",
-            "discard",
-            "take",
-            "put",
-            "grab"
+    "verb_2": {
+        "data": [
+            "journeyed",
+            "to",
+            "travelled",
+            "went",
+            "back",
+            "moved"
         ],
         "set_B": [
-            "apple",
-            "football",
-            "milk",
-            "there"
+            "hallway",
+            "bedroom",
+            "office",
+            "kitchen",
+            "garden",
+            "bathroom"
+        ],
+        "lemma_data": [
+            "journey",
+            "travel",
+            "go",
+            "move"
         ],
         "set_A": [
             "Daniel",
@@ -22,7 +28,9 @@
             "John",
             "Sandra",
             "Mary"
-        ],
+        ]
+    },
+    "verb_1": {
         "data": [
             "left",
             "dropped",
@@ -34,22 +42,22 @@
             "up",
             "put",
             "grabbed"
-        ]
-    },
-    "verb_2": {
-        "lemma_data": [
-            "journey",
-            "travel",
-            "go",
-            "move"
         ],
         "set_B": [
-            "hallway",
-            "bedroom",
-            "office",
-            "kitchen",
-            "garden",
-            "bathroom"
+            "apple",
+            "football",
+            "milk",
+            "there"
+        ],
+        "lemma_data": [
+            "leave",
+            "drop",
+            "get",
+            "pick",
+            "discard",
+            "take",
+            "put",
+            "grab"
         ],
         "set_A": [
             "Daniel",
@@ -57,14 +65,6 @@
             "John",
             "Sandra",
             "Mary"
-        ],
-        "data": [
-            "journeyed",
-            "to",
-            "travelled",
-            "went",
-            "back",
-            "moved"
         ]
     }
 }

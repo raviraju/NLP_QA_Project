@@ -1,0 +1,18 @@
+{
+    "objectVerbs": [
+        "leave",
+        "drop",
+        "get",
+        "pick",
+        "discard",
+        "take",
+        "put",
+        "grab"
+    ],
+    "locationVerbs": [
+        "journey",
+        "travel",
+        "go",
+        "move"
+    ]
+}

@@ -1,17 +1,16 @@
 {
     "verb_4": {
-        "data": [
-            "moved",
-            "back",
-            "went",
-            "travelled",
-            "journeyed"
-        ],
         "lemma_data": [
             "move",
             "go",
             "travel",
             "journey"
+        ],
+        "set_A": [
+            "Sandra",
+            "Daniel",
+            "John",
+            "Mary"
         ],
         "set_B": [
             "office",
@@ -21,14 +20,36 @@
             "garden",
             "hallway"
         ],
+        "data": [
+            "moved",
+            "back",
+            "went",
+            "travelled",
+            "journeyed"
+        ]
+    },
+    "verb_0": {
+        "lemma_data": [
+            "get",
+            "grab",
+            "leave",
+            "discard",
+            "drop",
+            "put",
+            "take",
+            "pick"
+        ],
         "set_A": [
             "Sandra",
             "Daniel",
             "John",
             "Mary"
-        ]
-    },
-    "verb_0": {
+        ],
+        "set_B": [
+            "apple",
+            "milk",
+            "football"
+        ],
         "data": [
             "got",
             "grabbed",
@@ -40,27 +61,6 @@
             "up",
             "down",
             "picked"
-        ],
-        "lemma_data": [
-            "get",
-            "grab",
-            "leave",
-            "discard",
-            "drop",
-            "put",
-            "take",
-            "pick"
-        ],
-        "set_B": [
-            "apple",
-            "milk",
-            "football"
-        ],
-        "set_A": [
-            "Sandra",
-            "Daniel",
-            "John",
-            "Mary"
         ]
     }
 }

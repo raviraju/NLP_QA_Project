@@ -1,5 +1,17 @@
 {
     "verb_2": {
+        "lemma_data": [
+            "go",
+            "travel",
+            "move",
+            "journey"
+        ],
+        "data": [
+            "went",
+            "travelled",
+            "moved",
+            "journeyed"
+        ],
         "set_B": [
             "bathroom",
             "kitchen",
@@ -13,18 +25,6 @@
             "Daniel",
             "Mary",
             "John"
-        ],
-        "lemma_data": [
-            "go",
-            "travel",
-            "move",
-            "journey"
-        ],
-        "data": [
-            "went",
-            "travelled",
-            "moved",
-            "journeyed"
         ]
     }
 }

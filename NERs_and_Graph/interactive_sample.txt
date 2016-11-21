@@ -1,0 +1,86 @@
+ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project/NERs_and_Graph$ python babiGraph/newBabiGraph.py -i
+*************************************************
+All right, Lets start with a new story
+		1 Mary moved to the bathroom
+		2 John went to the hallway
+Where is Mary? 
+Do you want me to answer the question (yes/no)
+yes
+We know that
+1 Mary moved to the bathroom
+Hence, we can infer that
+Mary is at bathroom
+Do you want me to continue with some more facts? (yes/no)
+yes
+		4 Daniel went back to the hallway
+		5 Sandra moved to the garden
+Where is Daniel? 
+Do you want me to answer the question (yes/no)
+yes
+We know that
+4 Daniel went back to the hallway
+Hence, we can infer that
+Daniel is in the hallway
+Do you want me to continue with some more facts? (yes/no)
+yes
+		7 John moved to the office
+		8 Sandra journeyed to the bathroom
+Where is Daniel? 
+Do you want me to answer the question (yes/no)
+no
+What other question would you like me to answer
+Where is Ravi
+Let me think
+Sorry, We are not aware of Ravi, Hence cant answer the question
+Do you want me to continue with some more facts? (yes/no)
+yes
+		10 Mary moved to the hallway
+		11 Daniel travelled to the office
+Where is Daniel? 
+yesDo you want me to answer the question (yes/no)
+yes
+We know that
+4 Daniel went back to the hallway
+and then
+11 Daniel travelled to the office
+Hence, we can infer that
+Daniel is at office
+Do you want me to continue with some more facts? (yes/no)
+yes
+		13 John went back to the garden
+		14 John moved to the bedroom
+Where is Sandra? 
+Do you want me to answer the question (yes/no)
+no
+What other question would you like me to answer
+Where is John
+Let me think
+We know that
+2 John went to the hallway
+and then
+7 John moved to the office
+and then
+13 John went back to the garden
+and then
+14 John moved to the bedroom
+Hence, we can infer that
+John is at bedroom
+Do you want me to continue with some more facts? (yes/no)
+yes
+*************************************************
+All right, Lets start with a new story
+		1 Sandra travelled to the office
+		2 Sandra went to the bathroom
+Where is Sandra? 
+Do you want me to answer the question (yes/no)
+yes
+We know that
+1 Sandra travelled to the office
+and then
+2 Sandra went to the bathroom
+Hence, we can infer that
+Sandra is at bathroom
+Do you want me to continue with some more facts? (yes/no)
+no
+ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project/NERs_and_Graph$ 
+

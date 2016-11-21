@@ -40,7 +40,7 @@ class babiGraph():
         return output
     def analyzeQuestion(self,QDict):
         verb=QDict["POS_Verb"]
-        WHQ=QDict["WHQ"]
+        WHQ=QDict.get("WHQ","NoWHQues")
         actorNode=QDict.get("POS_NNP","actorNode")
         objectLocationNode=QDict.get("POS_NN","objectLocationNode")
         lemma=str(QDict["Lemma_Verb"])
@@ -59,16 +59,17 @@ class babiGraph():
             json.dump(QJSON,textFile)
             textFile.write("\n")
         pass
-    def traverseGraph(self,node,QJsonObj):
+    def traverseGraph(self,node,QJsonObj,YESNO):
         QEdgeAttribute = dict()
         sampleDict=dict()
+        YESNO_EXPECTED_ANS=""
         neigh = self.G.neighbors(node)
         lemmaDict = {}
         locationSet = set(["go","travel","journey","move"])
         locationDict = {}
-        objectSet = set(["football","apple","milk","box"])
+        #"football","apple","milk","box",
+        objectSet = set(["pick","leave","grab","take","get","discard","drop","put"])
         objectDict = {}
-        
         for neighborNode in neigh:
             uvEdge=(neighborNode,node)
             u=uvEdge[0]
@@ -81,8 +82,10 @@ class babiGraph():
                    lemmaDict[Lemma][TS] = neighborNode
                else:
                    lemmaDict[Lemma] = {TS : neighborNode}
-        print(lemmaDict)
+        #print(lemmaDict)
+        #return
         #differenciate bw lemmas
+        location=""
         for lemma in lemmaDict:
             finalResultDict=dict()
             if lemma in locationSet:
@@ -100,17 +103,16 @@ class babiGraph():
         timeStamps = finalResultDict.keys()
         latestTimeStamp = max(timeStamps, key=int)
         answer = finalResultDict[latestTimeStamp]
-        #print(answer,QJsonObj,latestTimeStamp)
-        
-        self.writeResults(answer, QJsonObj, latestTimeStamp)
-        #lemmaChoice = input("Enter lemma type : {}\n".format(lemmaDict))
-        #choices = lemmaDict.get(lemmaChoice,None)
-        #print(choices)
-        #if choices:
-        #    timeStamps = choices.keys()
-        #    latestTimeStamp = max(timeStamps, key=int)
-            #print("Answer is " + choices[latestTimeStamp])
-        #    print(question+"\t"+choices[latestTimeStamp]+"\t"+str(latestTimeStamp))
+        if YESNO:
+            ##POSSIBLE CULPRIT##
+            YESNO_EXPECTED_ANS=QJsonObj['POS_NN']
+            if answer!=YESNO_EXPECTED_ANS:
+                answer="no"
+            else:
+                answer="yes"
+            self.writeResults(answer, QJsonObj, latestTimeStamp)
+        else:
+            self.writeResults(answer, QJsonObj, latestTimeStamp)
     def processQuestion(self,output,que):
         originalText = ""
         resultDict = dict()
@@ -136,12 +138,9 @@ class babiGraph():
     def saveGraph(self,name):
         plt.clf()
         if self.storyNum < 25:
-#             self.G.node[qNode]['color']='blue'
-#             pos = nx.spring_layout(self.G)
-#             nx.draw_networkx_nodes(self.G, pos=pos, nodelist = self.G.nodes())
-#             nx.draw_networkx_edges(self.G, pos=pos, edgelist = self.G.edges())
-#             nx.draw_networkx_labels(self.G, pos=pos)
-            nx.draw(self.G,with_labels=True)
+            pos=nx.spring_layout(self.G)   
+            nx.draw(self.G,pos,with_labels=True)
+            nx.draw_networkx_edge_labels(self.G, pos)
             dirName=str(self.storyNum)
             dirName=os.path.join(Globals.IMAGE_DIR, dirName)
             if not os.path.exists(dirName):
@@ -150,6 +149,7 @@ class babiGraph():
             plt.savefig(dirName+"/"+fName+".png")
 if __name__ == "__main__":
     babiGraphObj = babiGraph()
+    YESNO=True
     with io.open(Globals.NERTEXT_FILE) as data_file:   
         for line in data_file:
             jsonObj = json.loads(line)
@@ -161,7 +161,7 @@ if __name__ == "__main__":
                 annotedQuestion=babiGraphObj.annotateQuestion(question)
                 QDict=babiGraphObj.processQuestion(annotedQuestion,question)
                 QNode=babiGraphObj.analyzeQuestion(QDict)
-                babiGraphObj.traverseGraph(QNode,jsonObj)
+                babiGraphObj.traverseGraph(QNode,jsonObj,YESNO)
                 
             else:
                 sentence = jsonObj["Sentence"]

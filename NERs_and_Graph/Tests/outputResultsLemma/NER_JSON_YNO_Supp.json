@@ -1,0 +1,329 @@
+{
+    "1": {
+        "Lemma_Verb": "go",
+        "POS_NN": "office",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "went",
+        "SNO": "1",
+        "Sentence": "Daniel went to the office",
+        "isFact": true
+    },
+    "10": {
+        "Lemma_Verb": "put",
+        "POS_NN": "apple",
+        "POS_NNP": "Mary",
+        "POS_Verb": "put",
+        "SNO": "10",
+        "Sentence": "Mary put down the apple there",
+        "isFact": true
+    },
+    "11": {
+        "Lemma_Verb": "get",
+        "POS_NN": "milk",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "got",
+        "SNO": "11",
+        "Sentence": "Sandra got the milk there",
+        "isFact": true
+    },
+    "12": {
+        "Lemma_Verb": "be",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Mary",
+        "POS_Verb": "Is",
+        "SNO": "12",
+        "Sentence": "Is Mary in the kitchen? ",
+        "answer": "no",
+        "isFact": false,
+        "supportingFactNos": [
+            "8"
+        ]
+    },
+    "13": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "travelled",
+        "SNO": "13",
+        "Sentence": "Sandra travelled to the bedroom",
+        "isFact": true
+    },
+    "14": {
+        "Lemma_Verb": "take",
+        "POS_NN": "apple",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "took",
+        "SNO": "14",
+        "Sentence": "Sandra took the apple there",
+        "isFact": true
+    },
+    "15": {
+        "Lemma_Verb": "be",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Mary",
+        "POS_Verb": "Is",
+        "SNO": "15",
+        "Sentence": "Is Mary in the bedroom? ",
+        "answer": "yes",
+        "isFact": false,
+        "supportingFactNos": [
+            "8"
+        ]
+    },
+    "16": {
+        "Lemma_Verb": "go",
+        "POS_NN": "bedroom",
+        "POS_NNP": "John",
+        "POS_Verb": "went",
+        "SNO": "16",
+        "Sentence": "John went back to the bedroom",
+        "isFact": true
+    },
+    "17": {
+        "Lemma_Verb": "be",
+        "POS_NN": "office",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "Is",
+        "SNO": "17",
+        "Sentence": "Is Sandra in the office? ",
+        "answer": "no",
+        "isFact": false,
+        "supportingFactNos": [
+            "15"
+        ]
+    },
+    "18": {
+        "Lemma_Verb": "take",
+        "POS_NN": "football",
+        "POS_NNP": "Mary",
+        "POS_Verb": "took",
+        "SNO": "18",
+        "Sentence": "Mary took the football there",
+        "isFact": true
+    },
+    "19": {
+        "Lemma_Verb": "be",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Mary",
+        "POS_Verb": "Is",
+        "SNO": "19",
+        "Sentence": "Is Mary in the bedroom? ",
+        "answer": "yes",
+        "isFact": false,
+        "supportingFactNos": [
+            "17"
+        ]
+    },
+    "2": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "hallway",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "journeyed",
+        "SNO": "2",
+        "Sentence": "Sandra journeyed to the hallway",
+        "isFact": true
+    },
+    "20": {
+        "Lemma_Verb": "put",
+        "POS_NN": "milk",
+        "POS_NNP": "John",
+        "POS_Verb": "put",
+        "SNO": "20",
+        "Sentence": "John put down the milk",
+        "isFact": true
+    },
+    "21": {
+        "Lemma_Verb": "be",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Mary",
+        "POS_Verb": "Is",
+        "SNO": "21",
+        "Sentence": "Is Mary in the kitchen? ",
+        "answer": "yes",
+        "isFact": false,
+        "supportingFactNos": [
+            "14"
+        ]
+    },
+    "22": {
+        "Lemma_Verb": "travel",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "travelled",
+        "SNO": "22",
+        "Sentence": "Daniel travelled to the bathroom",
+        "isFact": true
+    },
+    "23": {
+        "Lemma_Verb": "be",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "Is",
+        "SNO": "23",
+        "Sentence": "Is Daniel in the bathroom? ",
+        "answer": "yes",
+        "isFact": false,
+        "supportingFactNos": [
+            "22"
+        ]
+    },
+    "24": {
+        "Lemma_Verb": "discard",
+        "POS_NN": "milk",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "discarded",
+        "SNO": "24",
+        "Sentence": "Daniel discarded the milk",
+        "isFact": true
+    },
+    "25": {
+        "Lemma_Verb": "be",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Mary",
+        "POS_Verb": "Is",
+        "SNO": "25",
+        "Sentence": "Is Mary in the kitchen? ",
+        "answer": "yes",
+        "isFact": false,
+        "supportingFactNos": [
+            "20"
+        ]
+    },
+    "26": {
+        "Lemma_Verb": "get",
+        "POS_NN": "milk",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "got",
+        "SNO": "26",
+        "Sentence": "Daniel got the milk there",
+        "isFact": true
+    },
+    "27": {
+        "Lemma_Verb": "move",
+        "POS_NN": "garden",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "moved",
+        "SNO": "27",
+        "Sentence": "Sandra moved to the garden",
+        "isFact": true
+    },
+    "28": {
+        "Lemma_Verb": "be",
+        "POS_NN": "kitchen",
+        "POS_NNP": "John",
+        "POS_Verb": "Is",
+        "SNO": "28",
+        "Sentence": "Is John in the kitchen? ",
+        "answer": "yes",
+        "isFact": false,
+        "supportingFactNos": [
+            "23"
+        ]
+    },
+    "29": {
+        "Lemma_Verb": "take",
+        "POS_NN": "apple",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "took",
+        "SNO": "29",
+        "Sentence": "Daniel took the apple there",
+        "isFact": true
+    },
+    "3": {
+        "Lemma_Verb": "be",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "Is",
+        "SNO": "3",
+        "Sentence": "Is Sandra in the kitchen? ",
+        "answer": "no",
+        "isFact": false,
+        "supportingFactNos": [
+            "2"
+        ]
+    },
+    "30": {
+        "Lemma_Verb": "go",
+        "POS_NN": "kitchen",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "went",
+        "SNO": "30",
+        "Sentence": "Sandra went back to the kitchen",
+        "isFact": true
+    },
+    "31": {
+        "Lemma_Verb": "be",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "Is",
+        "SNO": "31",
+        "Sentence": "Is Sandra in the bedroom? ",
+        "answer": "no",
+        "isFact": false,
+        "supportingFactNos": [
+            "30"
+        ]
+    },
+    "4": {
+        "Lemma_Verb": "go",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "went",
+        "SNO": "4",
+        "Sentence": "Daniel went back to the bedroom",
+        "isFact": true
+    },
+    "5": {
+        "Lemma_Verb": "get",
+        "POS_NN": "apple",
+        "POS_NNP": "Mary",
+        "POS_Verb": "got",
+        "SNO": "5",
+        "Sentence": "Mary got the apple there",
+        "isFact": true
+    },
+    "6": {
+        "Lemma_Verb": "be",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Daniel",
+        "POS_Verb": "Is",
+        "SNO": "6",
+        "Sentence": "Is Daniel in the bedroom? ",
+        "answer": "yes",
+        "isFact": false,
+        "supportingFactNos": [
+            "4"
+        ]
+    },
+    "7": {
+        "Lemma_Verb": "move",
+        "POS_NN": "bathroom",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "moved",
+        "SNO": "7",
+        "Sentence": "Sandra moved to the bathroom",
+        "isFact": true
+    },
+    "8": {
+        "Lemma_Verb": "journey",
+        "POS_NN": "bedroom",
+        "POS_NNP": "Mary",
+        "POS_Verb": "journeyed",
+        "SNO": "8",
+        "Sentence": "Mary journeyed to the bedroom",
+        "isFact": true
+    },
+    "9": {
+        "Lemma_Verb": "be",
+        "POS_NN": "hallway",
+        "POS_NNP": "Sandra",
+        "POS_Verb": "Is",
+        "SNO": "9",
+        "Sentence": "Is Sandra in the hallway? ",
+        "answer": "no",
+        "isFact": false,
+        "supportingFactNos": [
+            "7"
+        ]
+    }
+}

@@ -28,6 +28,14 @@ from os.path import basename
 def getFileNamePart(fileName,stripText):
     return basename(fileName).strip(stripText)
 
+def getLemmaVerbData(posLemmaVerbDict, verbData):
+    lemmaVerbs = []
+    for verb in verbData:
+        lemmaVerb = posLemmaVerbDict.get(verb,"")
+        if lemmaVerb:
+            lemmaVerbs.append(lemmaVerb)
+    return lemmaVerbs
+    
 def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
     classifyVerbFileName = getFileNamePart(clusters_factFile, '.json') + "_classifyVerb.json"
     clustersDict = {}
@@ -43,6 +51,7 @@ def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
     #pprint(entityClusterDict)
     
     clusterVerbDict = {}
+    posLemmaVerbDict = {}
     with open(pos_lemmaTagged_factFile, 'r') as pos_lemmaFile, open(clusters_factFile, 'r') as clusters_File:
         for item in json_lines.reader(pos_lemmaFile):
             itemKeys = item.keys()
@@ -60,6 +69,7 @@ def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
                 if 'POS_Verb' in itemKeys:
                     pos_verb = item['POS_Verb']
                 #print(pos_nnp, pos_verb, pos_nn, lemma_verb)
+                posLemmaVerbDict[pos_verb] = lemma_verb
                 clusterVerb = entityClusterDict.get(pos_verb, None)
                 clusterNN  = entityClusterDict.get(pos_nn, None)
                 clusterNNP = entityClusterDict.get(pos_nnp, None)
@@ -87,6 +97,7 @@ def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
             setB_Index = clustersMapped[1]
             setB_Data = clustersDict[setB_Index]
             verbDetails['data'] = verbData
+            verbDetails['lemma_data'] = getLemmaVerbData(posLemmaVerbDict, verbData)
             verbDetails[setA] = setA_Data
             verbDetails[setB] = setB_Data
             resultDict[verbName] = verbDetails

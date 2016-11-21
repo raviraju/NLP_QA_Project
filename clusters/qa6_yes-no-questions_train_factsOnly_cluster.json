@@ -1,0 +1,43 @@
+{
+    "4": [
+        "Daniel",
+        "the",
+        "John",
+        "Sandra",
+        "Mary"
+    ],
+    "3": [
+        "apple",
+        "football",
+        "milk",
+        "there"
+    ],
+    "0": [
+        "hallway",
+        "bedroom",
+        "office",
+        "kitchen",
+        "garden",
+        "bathroom"
+    ],
+    "1": [
+        "left",
+        "dropped",
+        "got",
+        "picked",
+        "discarded",
+        "down",
+        "took",
+        "up",
+        "put",
+        "grabbed"
+    ],
+    "2": [
+        "journeyed",
+        "to",
+        "travelled",
+        "went",
+        "back",
+        "moved"
+    ]
+}

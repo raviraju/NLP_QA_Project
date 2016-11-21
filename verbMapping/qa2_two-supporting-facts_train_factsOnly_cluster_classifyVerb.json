@@ -7,6 +7,12 @@
             "travelled",
             "journeyed"
         ],
+        "lemma_data": [
+            "move",
+            "go",
+            "travel",
+            "journey"
+        ],
         "set_B": [
             "office",
             "kitchen",
@@ -34,6 +40,16 @@
             "up",
             "down",
             "picked"
+        ],
+        "lemma_data": [
+            "get",
+            "grab",
+            "leave",
+            "discard",
+            "drop",
+            "put",
+            "take",
+            "pick"
         ],
         "set_B": [
             "apple",

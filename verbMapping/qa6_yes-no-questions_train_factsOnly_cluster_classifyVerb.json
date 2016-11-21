@@ -1,0 +1,70 @@
+{
+    "verb_1": {
+        "lemma_data": [
+            "leave",
+            "drop",
+            "get",
+            "pick",
+            "discard",
+            "take",
+            "put",
+            "grab"
+        ],
+        "set_B": [
+            "apple",
+            "football",
+            "milk",
+            "there"
+        ],
+        "set_A": [
+            "Daniel",
+            "the",
+            "John",
+            "Sandra",
+            "Mary"
+        ],
+        "data": [
+            "left",
+            "dropped",
+            "got",
+            "picked",
+            "discarded",
+            "down",
+            "took",
+            "up",
+            "put",
+            "grabbed"
+        ]
+    },
+    "verb_2": {
+        "lemma_data": [
+            "journey",
+            "travel",
+            "go",
+            "move"
+        ],
+        "set_B": [
+            "hallway",
+            "bedroom",
+            "office",
+            "kitchen",
+            "garden",
+            "bathroom"
+        ],
+        "set_A": [
+            "Daniel",
+            "the",
+            "John",
+            "Sandra",
+            "Mary"
+        ],
+        "data": [
+            "journeyed",
+            "to",
+            "travelled",
+            "went",
+            "back",
+            "moved"
+        ]
+    }
+}

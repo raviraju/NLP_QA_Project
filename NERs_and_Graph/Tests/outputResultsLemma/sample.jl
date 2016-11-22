@@ -1,0 +1,6 @@
+{"POS_NN": "bathroom", "POS_Verb": "moved", "SNO": "1", "Lemma_Verb": "move", "POS_NNP": "Mary", "isFact": true, "Sentence": "Mary moved to the bathroom"}
+{"POS_NN": "bedroom", "POS_Verb": "journeyed", "SNO": "2", "Lemma_Verb": "journey", "POS_NNP": "Sandra", "isFact": true, "Sentence": "Sandra journeyed to the bedroom"}
+{"POS_NN": "hallway", "answer": "no", "SNO": "3", "Lemma_Verb": "be", "POS_Verb": "Is", "Sentence": "Is Sandra in the hallway? ", "POS_NNP": "Sandra", "isFact": false, "supportingFactNos": ["2"]}
+{"POS_NN": "bedroom", "POS_Verb": "went", "SNO": "4", "Lemma_Verb": "go", "POS_NNP": "Mary", "isFact": true, "Sentence": "Mary went back to the bedroom"}
+{"POS_NN": "hallway", "POS_Verb": "went", "SNO": "5", "Lemma_Verb": "go", "POS_NNP": "Daniel", "isFact": true, "Sentence": "Daniel went back to the hallway"}
+{"POS_NN": "bathroom", "answer": "no", "SNO": "6", "Lemma_Verb": "be", "POS_Verb": "Is", "Sentence": "Is Daniel in the bathroom? ", "POS_NNP": "Daniel", "isFact": false, "supportingFactNos": ["5"]}

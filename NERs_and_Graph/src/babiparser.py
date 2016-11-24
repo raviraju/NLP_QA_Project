@@ -73,7 +73,12 @@ class BabiParser(object):
             resultDict['answer'] = answer
             resultDict['supportingFactNos'] = supportingFactNos
             # Wh word
-            resultDict['POS_WRB'] = list(filter(lambda x: x['pos'] == 'WRB', tokens))[0]['originalText']
+            q_words = list(filter(lambda x: x['pos'] == 'WRB', tokens))
+            if q_words:
+                resultDict['POS_WRB'] = q_words[0]['originalText']
+                resultDict['expAnsType'] = "WHERE" #Where
+            else:
+                resultDict['expAnsType'] = "YESNO" # Yes No
 
         # old code
         for tok in sentence['tokens']:

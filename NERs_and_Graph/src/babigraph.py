@@ -108,7 +108,7 @@ class BabiGraph(object):
             raise Exception('%s not known' % str(node))
 
     def traverseGraph(self, node, QJsonObj, is_actor):
-        print("Args: ", node, QJsonObj, is_actor)
+        # print("Args: ", node, QJsonObj, is_actor)
         subject = node
         reasons = {}
         if node not in self.G:
@@ -124,7 +124,7 @@ class BabiGraph(object):
         if not is_actor:
             # find recent actor and time
             ts, action, node = self.find_recent_neighbor(node)
-            print(">>", ts, action, node)
+            # print(">>", ts, action, node)
             a_type = self.action_clsfr.classify(action)
             if a_type == 'attach':
                 oldest_mem_no = ts
@@ -158,7 +158,6 @@ class BabiGraph(object):
         timeStamps = candidates.keys()
 
         timeStamps = list(filter(lambda x: oldest_mem_no <= x <= newest_mem_no, timeStamps))
-        print(timeStamps)
         if not timeStamps:
             print("ERROR: Insufficient data or wrong question")
             return None
@@ -176,9 +175,13 @@ class BabiGraph(object):
                 print("%d %s" % (ts, reason))
                 female.say(reason)
                 i += 1
-        print("Time Stamps :", timeStamps)
+
+        # print("Time Stamps :", timeStamps)
         latestTimeStamp = max(timeStamps, key=int)
         answer = candidates[latestTimeStamp]
+        # convert answer to binary if expectation is yes no type
+        if QJsonObj.get('expAnsType', '') == 'YESNO':
+            answer = "yes" if answer == QJsonObj['POS_NN'] else "no"
         if self.interactive:
             print("Hence, we can infer that")
             female.say("Hence, we can infer that")

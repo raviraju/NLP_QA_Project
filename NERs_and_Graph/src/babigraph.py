@@ -43,12 +43,10 @@ class BabiGraph(object):
                 corenlp=Globals.CORENLP_SERVER):
         self.parser = BabiParser(corenlp)
         self.interactive = interactive
-        self.save_graph = save_graph
         self.int_graph = int_graph
         self.subStoryFacts = {}
         self.G = nx.Graph()
         self.storyNum = 0
-        self.corenlp = StanfordCoreNLP(Globals.CORENLP_SERVER)
         self.action_clsfr = ActionClassifier()
 
     def subStoryCheck(self, fact):
@@ -127,7 +125,8 @@ class BabiGraph(object):
             # print(">>", ts, action, node)
             a_type = self.action_clsfr.classify(action)
             if a_type == 'attach':
-                oldest_mem_no = ts
+                #oldest_mem_no = ts
+                pass
             elif a_type == 'detach':
                 newest_mem_no = ts
             else:
@@ -209,21 +208,11 @@ class BabiGraph(object):
 
     def displayGraph(self):
         if self.int_graph:
-            nx.draw(self.G, with_labels=True)
+            plt.clf()
+            pos = nx.spring_layout(self.G)
+            nx.draw(self.G, pos, with_labels=True)
+            nx.draw_networkx_edge_labels(self.G, pos)
             plt.show()
-
-    def saveGraph(self, name):
-        if self.save_graph:
-            return
-        plt.clf()
-        if self.storyNum < 25:
-            nx.draw(self.G, with_labels=True)
-            dirName = str(self.storyNum)
-            dirName = os.path.join(Globals.IMAGE_DIR, dirName)
-            if not os.path.exists(dirName):
-                os.makedirs(dirName)
-            fName = name
-            plt.savefig(dirName + "/" + fName + ".png")
 
     def update_story(self, ann_line):
         timestamp = ann_line['SNO']
@@ -241,7 +230,6 @@ class BabiGraph(object):
         self.G.add_node(node1) #,color='red',style='filled',fillcolor='blue',shape='square'
         self.G.add_node(node2)
         self.G.add_edge(node1, node2, edgeAttribute)
-        self.saveGraph(str(timestamp))
 
     def answer_question(self, ann_line):
         timestamp = ann_line["SNO"]
@@ -304,7 +292,6 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--interactive", help="enable interactive user mode", action="store_true")
     parser.add_argument("-ig", "--graph", help="enable interactive Graph", action="store_true")
     parser.add_argument("-in", "--input", help="Input file", default=Globals.NERTEXT_FILE)
-    parser.add_argument("-im", "--images", help="Input file", default=Globals.IMAGE_DIR)
     parser.add_argument("-o", "--out", help="Output file", default=Globals.RESULTS_FILE)
 
     args = parser.parse_args()

@@ -11,24 +11,45 @@ from Globals import Globals
 from networkx.classes.function import neighbors
 from babiparser import BabiParser
 
+# TODO: make this optional
 import espeak
 #https://github.com/relsi/python-espeak
 male = espeak.ESpeak(amplitude=200, word_gap=-50, pitch=36, speed=200, voice='english-us')
 female = espeak.ESpeak(amplitude=200, word_gap=-50, pitch=77, speed=200, voice='english-us')
 
-class BabiGraph():
+class ActionClassifier(object):
 
-    def __init__(self, interactive=False, save_graph=False, corenlp=Globals.CORENLP_SERVER):
+    def __init__(self, model=None):
+        # Label -> set of Actions
+        self.model = model if model else {
+            'attach': set(['get', 'grab', 'pick', 'take']),
+            'detach': set(['discard', 'drop', 'leave', 'put']),
+            'transport': set(['go', 'journey', 'move', 'travel'])
+        }
+
+    def classify(self, action):
+        for label, terms in self.model.items():
+            if action in terms:
+                return label
+        raise Exception("Haven't learnt this action : %s" % action)
+
+    def classes(self):
+        return self.model.keys()
+
+class BabiGraph(object):
+    def __init__(self, interactive=False,
+                save_graph=False,
+                int_graph=False,
+                corenlp=Globals.CORENLP_SERVER):
         self.parser = BabiParser(corenlp)
         self.interactive = interactive
         self.save_graph = save_graph
-        self.edgeList = []
-        self.nodeList = []
-        self.timeStampLemmaDict = dict()
-        self.subStoryFacts = dict()
+        self.int_graph = int_graph
+        self.subStoryFacts = {}
         self.G = nx.Graph()
         self.storyNum = 0
         self.corenlp = StanfordCoreNLP(Globals.CORENLP_SERVER)
+        self.action_clsfr = ActionClassifier()
 
     def subStoryCheck(self, fact):
         if (fact == 1):
@@ -39,6 +60,7 @@ class BabiGraph():
                 print(new_story)
             self.storyNum += 1
             self.G.clear()
+            self.subStoryFacts = {}
 
     def question(self, subStory):
         print(subStory)
@@ -49,9 +71,9 @@ class BabiGraph():
         actorNode = QDict.get("POS_NNP", "actorNode")
         objectLocationNode = QDict.get("POS_NN", "objectLocationNode")
         if self.G.has_node(actorNode):
-            return actorNode
+            return actorNode, True
         if self.G.has_node(objectLocationNode):
-            return objectLocationNode
+            return objectLocationNode, False
         # Not Found
         return None
 
@@ -67,71 +89,101 @@ class BabiGraph():
         else:
             return "Something went wrong, I cant answer"
 
-    def traverseGraph(self, node, QJsonObj, subject):
-        print("Args: ", node, QJsonObj, subject)
-        QEdgeAttribute = dict()
-        sampleDict = dict()
-        allNodes = self.G.nodes()
-        if node not in allNodes:
+    def find_recent_neighbor(self, node):
+        # node exists
+        if node in self.G:
+            neighbors = self.G[node]
+            rec_time = -1
+            rec_neigh = None
+            rec_action = None
+            for neigh, edge_data in neighbors.items():
+                n_time = max(edge_data.keys()) # keys has timestamp
+                if n_time > rec_time:
+                    rec_time = n_time
+                    rec_neigh = neigh
+                    rec_action = edge_data[rec_time]
+            assert rec_neigh is not None
+            return rec_time, rec_action, rec_neigh
+        else:
+            raise Exception('%s not known' % str(node))
+
+    def traverseGraph(self, node, QJsonObj, is_actor):
+        print("Args: ", node, QJsonObj, is_actor)
+        subject = node
+        reasons = {}
+        if node not in self.G:
             if self.interactive:
-                dont_know = "Sorry, We are not aware of " + subject + ", Hence cant answer the question"
+                dont_know = "Sorry, We are not aware of " + node + ", Hence cant answer the question"
                 print(dont_know)
                 female.say(dont_know)
             return None
-        neigh = self.G.neighbors(node)
-        print("neighbors: ", neigh)
-        lemmaDict = {}
-        locationSet = set(["go", "travel", "journey", "move"])
-        locationDict = {}
-        objectSet = set(["football", "apple", "milk", "box"])
-        objectDict = {}
 
+        neigh = self.G.neighbors(node)
+        oldest_mem_no = float('-inf') # oldest memory for search
+        newest_mem_no = float('inf')  # newest memory for search
+        if not is_actor:
+            # find recent actor and time
+            ts, action, node = self.find_recent_neighbor(node)
+            print(">>", ts, action, node)
+            a_type = self.action_clsfr.classify(action)
+            if a_type == 'attach':
+                oldest_mem_no = ts
+            elif a_type == 'detach':
+                newest_mem_no = ts
+            else:
+                raise Exception("This shouldnt be happening!")
+            reasons[ts] = self.subStoryFacts[ts]
+            # find recent neighbors of actor
+            neigh = self.G.neighbors(node)
+
+        lemmaDict = {}
         for neighborNode in neigh:
             uvEdge = (neighborNode, node)
             u = uvEdge[0]
             v = uvEdge[1]
-            QEdgeAttribute.update(self.G.get_edge_data(u, v))
-            sampleDict[neighborNode]=self.G.get_edge_data(u, v)
             attributeDict = self.G.get_edge_data(u, v)
-            for TS, Lemma in attributeDict.items():
+            for TS,Lemma in attributeDict.items():
                if Lemma in lemmaDict:
                    lemmaDict[Lemma][TS] = neighborNode
                else:
                    lemmaDict[Lemma] = {TS : neighborNode}
-        for lemma in lemmaDict:
-            finalResultDict = dict()
-            if lemma in locationSet:
-                tsKeys = lemmaDict[lemma].keys()
-                for ts in tsKeys:
-                    location = lemmaDict[lemma][ts]
-                    locationDict[ts] = location
-                    finalResultDict = locationDict
-            if lemma in objectSet:
-                tsKeys = lemmaDict[lemma].keys()
-                for ts in tsKeys:
-                    object = lemmaDict[lemma][ts]
-                    objectDict[ts] = location
-                    finalResultDict = objectDict
-        timeStamps = finalResultDict.keys()
+
+        # find location connecting edges
+        location_edges = list(filter(lambda action: self.action_clsfr.classify(action) == 'transport', lemmaDict.keys()))
+        candidates = {}
+        for lemma in location_edges:
+            edges = lemmaDict[lemma]
+            for ts, node in edges.items():
+                candidates[ts] = node
+        timeStamps = candidates.keys()
+
+        timeStamps = list(filter(lambda x: oldest_mem_no <= x <= newest_mem_no, timeStamps))
+        print(timeStamps)
+        if not timeStamps:
+            print("ERROR: Insufficient data or wrong question")
+            return None
         if self.interactive:
+            for ts in timeStamps:
+                reasons[ts] = self.subStoryFacts[ts]
             recollect = "We know that"
             print(recollect)
             female.say(recollect)
-            i = 0
-            for timeStamp in sorted(timeStamps):
+            for i, ts in enumerate(sorted(reasons.keys())):
                 if i != 0:
                     print("and then")
                     female.say("and then")
-                print(str(timeStamp) + " " + self.subStoryFacts[timeStamp])
-                female.say(self.subStoryFacts[timeStamp])
+                reason = reasons[ts]
+                print("%d %s" % (ts, reason))
+                female.say(reason)
                 i += 1
-
+        print("Time Stamps :", timeStamps)
         latestTimeStamp = max(timeStamps, key=int)
-        answer = finalResultDict[latestTimeStamp]
+        answer = candidates[latestTimeStamp]
         if self.interactive:
             print("Hence, we can infer that")
             female.say("Hence, we can infer that")
-            template_ans = self.getTemplateAns(subject, answer, "location")
+            subj_type = "location" if node == subject else "object"
+            template_ans = self.getTemplateAns(subject, answer, subj_type)
             female.say(template_ans)
             print(template_ans)
         return (answer, QJsonObj, self.storyNum)
@@ -153,11 +205,12 @@ class BabiGraph():
         return resultDict
 
     def displayGraph(self):
-        nx.draw(self.G, with_labels=True)
-        plt.show()
+        if self.int_graph:
+            nx.draw(self.G, with_labels=True)
+            plt.show()
 
     def saveGraph(self, name):
-        if not self.save_graph:
+        if self.save_graph:
             return
         plt.clf()
         if self.storyNum < 25:
@@ -207,8 +260,8 @@ class BabiGraph():
                 ann_line = self.processQuestion(annotated, question)
 
         #subject = ann_line["POS_NNP"]
-        QNode = self.analyzeQuestion(ann_line)
-        return self.traverseGraph(QNode, ann_line, QNode)
+        QNode, is_actor = self.analyzeQuestion(ann_line)
+        return self.traverseGraph(QNode, ann_line, is_actor)
 
     def play(self, in_file, out_file=None):
         with io.open(in_file) as data_file:
@@ -246,11 +299,12 @@ if __name__ == "__main__":
                 description="construct graph from facts of a babi-task and answer questions",
                 formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument("-i", "--interactive", help="enable interactive user mode", action="store_true")
+    parser.add_argument("-ig", "--graph", help="enable interactive Graph", action="store_true")
     parser.add_argument("-in", "--input", help="Input file", default=Globals.NERTEXT_FILE)
     parser.add_argument("-im", "--images", help="Input file", default=Globals.IMAGE_DIR)
     parser.add_argument("-o", "--out", help="Output file", default=Globals.RESULTS_FILE)
 
     args = parser.parse_args()
-    bg = BabiGraph(args.interactive)
+    bg = BabiGraph(args.interactive, int_graph=args.graph)
     results = bg.play(args.input)
     bg.write_results(results, args.out)

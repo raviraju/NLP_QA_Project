@@ -27,7 +27,7 @@ class BabiParser(object):
         question = ' '.join(sNo_questionList)
         output = self.annotate(question)
         answer = questionList[1]
-        suppFactNos = map(int, questionList[2].strip().split())
+        suppFactNos = list(map(int, questionList[2].strip().split()))
         return self.parseOutput(sNo, question, output, False, answer, suppFactNos)
 
     def parse_storyline(self, line):
@@ -56,7 +56,7 @@ class BabiParser(object):
         resultDict['SNO'] = int(sNo)
         resultDict['isFact'] = isFact
 
-        nouns = filter(lambda x: x['pos'].startswith('NN'), tokens)
+        nouns = list(filter(lambda x: x['pos'].startswith('NN'), tokens))
         # fact has 2 nouns, question has atleast one noun
         assert (isFact and len(nouns) == 2) or (not isFact and 1 <= len(nouns) <= 2 )
 
@@ -66,14 +66,14 @@ class BabiParser(object):
             resultDict['_object'] = nouns[-1]['originalText']
 
         # search for verbs
-        verbs = filter(lambda x: x['pos'].startswith('VB'), tokens)
+        verbs = list(filter(lambda x: x['pos'].startswith('VB'), tokens))
         assert len(verbs) == 1 # check that one and only one verb exists
         resultDict['_verb'] = verbs[0]['lemma']
         if not isFact:
             resultDict['answer'] = answer
             resultDict['supportingFactNos'] = supportingFactNos
             # Wh word
-            resultDict['POS_WRB'] = filter(lambda x: x['pos'] == 'WRB', tokens)[0]['originalText']
+            resultDict['POS_WRB'] = list(filter(lambda x: x['pos'] == 'WRB', tokens))[0]['originalText']
 
         # old code
         for tok in sentence['tokens']:

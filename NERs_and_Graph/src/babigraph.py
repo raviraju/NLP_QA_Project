@@ -158,7 +158,6 @@ class BabiGraph(object):
         timeStamps = candidates.keys()
 
         timeStamps = list(filter(lambda x: oldest_mem_no <= x <= newest_mem_no, timeStamps))
-        # print(timeStamps)
         if not timeStamps:
             print("ERROR: Insufficient data or wrong question")
             return None
@@ -176,9 +175,11 @@ class BabiGraph(object):
                 print("%d %s" % (ts, reason))
                 female.say(reason)
                 i += 1
+
         # print("Time Stamps :", timeStamps)
         latestTimeStamp = max(timeStamps, key=int)
         answer = candidates[latestTimeStamp]
+        # convert answer to binary if expectation is yes no type
         if QJsonObj.get('expAnsType', '') == 'YESNO':
             answer = "yes" if answer == QJsonObj['POS_NN'] else "no"
         if self.interactive:
@@ -212,7 +213,7 @@ class BabiGraph(object):
             plt.show()
 
     def saveGraph(self, name):
-        if not self.save_graph:
+        if self.save_graph:
             return
         plt.clf()
         if self.storyNum < 25:

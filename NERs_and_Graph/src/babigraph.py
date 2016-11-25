@@ -14,8 +14,8 @@ from babiparser import BabiParser
 # TODO: make this optional
 import espeak
 #https://github.com/relsi/python-espeak
-male = espeak.ESpeak(amplitude=200, word_gap=-50, pitch=36, speed=200, voice='english-us')
-female = espeak.ESpeak(amplitude=200, word_gap=-50, pitch=77, speed=200, voice='english-us')
+female = espeak.ESpeak(amplitude=200, word_gap=-50, pitch=36, speed=220, voice='en-us')
+male = espeak.ESpeak(amplitude=200, word_gap=-50, pitch=80, speed=220, voice='en-us+f4')
 
 class ActionClassifier(object):
 

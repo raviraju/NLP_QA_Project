@@ -10,7 +10,7 @@ from pycorenlp import StanfordCoreNLP
 from Globals import Globals
 from networkx.classes.function import neighbors
 from babiparser import BabiParser
-
+import time
 # TODO: make this optional
 import espeak
 #https://github.com/relsi/python-espeak
@@ -40,9 +40,11 @@ class BabiGraph(object):
     def __init__(self, interactive=False,
                 save_graph=False,
                 int_graph=False,
+                interactive_delay = 0,
                 corenlp=Globals.CORENLP_SERVER):
         self.parser = BabiParser(corenlp)
         self.interactive = interactive
+        self.interactive_delay = interactive_delay
         self.int_graph = int_graph
         self.subStoryFacts = {}
         self.G = nx.Graph()
@@ -213,6 +215,7 @@ class BabiGraph(object):
             nx.draw(self.G, pos, with_labels=True)
             nx.draw_networkx_edge_labels(self.G, pos)
             plt.show()
+            time.sleep(self.interactive_delay)
 
     def update_story(self, ann_line):
         timestamp = ann_line['SNO']

@@ -1,8 +1,8 @@
 {
-    "locationVerbs": [
-        "go",
-        "travel",
+    "transport": [
         "move",
-        "journey"
+        "travel",
+        "journey",
+        "go"
     ]
 }

@@ -1,66 +1,83 @@
 {
-    "verb_4": {
+    "verb_2": {
+        "data": [
+            "put",
+            "discarded",
+            "left",
+            "down",
+            "dropped"
+        ],
         "lemma_data": [
-            "move",
-            "go",
-            "travel",
-            "journey"
+            "put",
+            "discard",
+            "leave",
+            "drop"
         ],
         "set_A": [
             "Sandra",
-            "Daniel",
+            "Mary",
             "John",
-            "Mary"
+            "Daniel"
+        ],
+        "set_B": [
+            "milk",
+            "football",
+            "apple"
+        ]
+    },
+    "verb_1": {
+        "data": [
+            "grabbed",
+            "took",
+            "picked",
+            "got",
+            "up"
+        ],
+        "lemma_data": [
+            "grab",
+            "take",
+            "pick",
+            "get"
+        ],
+        "set_A": [
+            "Sandra",
+            "Mary",
+            "John",
+            "Daniel"
+        ],
+        "set_B": [
+            "milk",
+            "football",
+            "apple"
+        ]
+    },
+    "verb_5": {
+        "data": [
+            "moved",
+            "journeyed",
+            "travelled",
+            "went",
+            "back"
+        ],
+        "lemma_data": [
+            "move",
+            "journey",
+            "travel",
+            "go"
+        ],
+        "set_A": [
+            "Sandra",
+            "Mary",
+            "John",
+            "Daniel"
         ],
         "set_B": [
             "office",
-            "kitchen",
-            "bathroom",
-            "bedroom",
+            "hallway",
             "garden",
-            "hallway"
-        ],
-        "data": [
-            "moved",
-            "back",
-            "went",
-            "travelled",
-            "journeyed"
-        ]
-    },
-    "verb_0": {
-        "lemma_data": [
-            "get",
-            "grab",
-            "leave",
-            "discard",
-            "drop",
-            "put",
-            "take",
-            "pick"
-        ],
-        "set_A": [
-            "Sandra",
-            "Daniel",
-            "John",
-            "Mary"
-        ],
-        "set_B": [
-            "apple",
-            "milk",
-            "football"
-        ],
-        "data": [
-            "got",
-            "grabbed",
-            "left",
-            "discarded",
-            "dropped",
-            "put",
-            "took",
-            "up",
-            "down",
-            "picked"
+            "bedroom",
+            "kitchen",
+            "bathroom"
         ]
     }
 }

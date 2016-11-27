@@ -46,8 +46,8 @@ def trainModel(factFile, verboseMode):
     model.save(modelFileName)
     print("Word2Vec model is stored in {}".format(modelFileName))
 
-def clusterWordEmbeddings(factFile, verboseMode):
-    genSim_model = gensim.models.Word2Vec.load('models/word2vec_model_' + getFileNamePart(factFile))
+def clusterWordEmbeddings(genSim_model, verboseMode):
+    #genSim_model = gensim.models.Word2Vec.load('models/word2vec_model_' + getFileNamePart(factFile))
         
     #the vector dictionary of the model
     word2vec_dict={}
@@ -119,6 +119,63 @@ def clusterWordEmbeddings(factFile, verboseMode):
 #Action_Travel    Person, Location
 #Things
 
+def findKey(key, groups):
+    for groupSet in groups:
+        if key in groupSet:
+            return True
+    return False
+
+def findGrp(key, groups):
+    for groupSet in groups:
+        if key in groupSet:
+            return groupSet
+    return None
+
+def postProcessClusters(genSim_model, resolve_objectClusterActions):
+    top2ActionDict = {}
+    lowConfidentActions = []
+    groups = []
+    for action in resolve_objectClusterActions:
+        #print(action)
+        group = []
+        all_similar_actions = genSim_model.most_similar(action)
+        for similar_action in all_similar_actions:
+            sim_action = similar_action [0]
+            confidence = similar_action [1]
+            if confidence > 0.99:
+                group.append(sim_action)
+                #print("\t Top_2 : {}\t{}".format(sim_action, confidence))
+        #print(group)
+        if len(group) > 0:
+            top2ActionDict[action] = group
+        else:
+            lowConfidentActions.append(action)
+    #pprint(top2ActionDict)
+    #pprint(lowConfidentActions)
+
+    for key,values in top2ActionDict.items():
+        #print(key, value)
+        if groups:
+            if not findKey(key, groups):
+                groupSet = set()
+                groupSet.add(key)
+                for value in values:
+                    groupSet.add(value)
+                groups.append(groupSet)
+        else:
+            groupSet = set()
+            groupSet.add(key)
+            for value in values:
+                groupSet.add(value)
+            groups.append(groupSet)
+    #pprint(groups)
+    for action in lowConfidentActions:
+        #print(action)
+        most_similar_action = ((genSim_model.most_similar(action))[0][0])
+        grp = findGrp(most_similar_action, groups)
+        if grp:
+            grp.add(action)
+    return(groups)
 
 def main():
     parser = argparse.ArgumentParser(description="Clustering of facts using word2vec distributed representation")
@@ -130,12 +187,24 @@ def main():
     
     trainModel(factFile, verboseMode)
     
-    clustersComputed = clusterWordEmbeddings(factFile, verboseMode)
+    genSim_model = gensim.models.Word2Vec.load('models/word2vec_model_' + getFileNamePart(factFile))
     
-    #pprint(clustersComputed)
+    clustersComputed = clusterWordEmbeddings(genSim_model, verboseMode)
+    
+    clustersReComputed = {}
+    no_of_clusters = 0
+    for cluster in clustersComputed:
+        #pprint(clustersComputed[cluster])
+        newClusterGrps = (postProcessClusters(genSim_model, clustersComputed[cluster]))
+        for clusterGrp in newClusterGrps:
+            #print(list(clusterGrp))
+            clustersReComputed[no_of_clusters] = list(clusterGrp)
+            no_of_clusters += 1
+    #pprint(clustersReComputed)
+    
     clusterFileName = "clusters/" + getFileNamePart(factFile) + "_cluster.json"
     with open(clusterFileName, 'w') as outfile:
-        json.dump(clustersComputed, outfile, indent=4)
+        json.dump(clustersReComputed, outfile, indent=4)
     print("Clusters computed are stored in {}".format(clusterFileName))
     #while True:
         #choice = input("Do you want to recompute clusters (y/n)?")

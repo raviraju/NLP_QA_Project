@@ -1,27 +1,27 @@
 {
+    "0": [
+        "Sandra",
+        "Mary",
+        "John",
+        "Daniel"
+    ],
     "1": [
-        "bathroom",
-        "kitchen",
         "bedroom",
+        "bathroom",
         "office",
+        "garden",
+        "kitchen"
+    ],
+    "2": [
+        "office",
+        "kitchen",
         "garden",
         "hallway"
     ],
-    "0": [
-        "Sandra",
-        "Daniel",
-        "Mary",
-        "John"
-    ],
     "3": [
-        "the",
-        "back"
-    ],
-    "2": [
-        "went",
-        "travelled",
         "moved",
-        "journeyed"
-    ],
-    "4": []
+        "travelled",
+        "journeyed",
+        "went"
+    ]
 }

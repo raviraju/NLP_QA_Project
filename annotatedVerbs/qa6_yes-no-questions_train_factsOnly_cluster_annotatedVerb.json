@@ -1,18 +1,20 @@
 {
-    "objectVerbs": [
-        "leave",
-        "drop",
-        "get",
-        "pick",
+    "detach": [
         "discard",
-        "take",
+        "leave",
         "put",
-        "grab"
+        "drop"
     ],
-    "locationVerbs": [
-        "journey",
+    "transport": [
         "travel",
-        "go",
-        "move"
+        "move",
+        "journey",
+        "go"
+    ],
+    "attach": [
+        "take",
+        "grab",
+        "pick",
+        "get"
     ]
 }

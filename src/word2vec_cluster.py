@@ -1,10 +1,13 @@
-#ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ python word2vec_cluster.py input/qa1_single-supporting-fact_train_factsOnly.txt 
-#Word2Vec model is stored in models/word2vec_model_qa1_single-supporting-fact_train_factsOnly
-#Clusters computed are stored in clusters/qa1_single-supporting-fact_train_factsOnly_cluster.json
-#ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ python word2vec_cluster.py input/qa2_two-supporting-facts_train_factsOnly.txt 
-#Word2Vec model is stored in models/word2vec_model_qa2_two-supporting-facts_train_factsOnly
-#Clusters computed are stored in clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json
-#ravirajukrishna@ubuntu:/media/ravirajukrishna/Windows/Users/Ravi/Desktop/USC/Courses_Sem3/NLP/project/NLP_QA_Project$ 
+#NLP_QA_Project/src$ python word2vec_cluster.py ../input/qa1_single-supporting-fact_train_factsOnly.txt 
+#Word2Vec model is stored in ../models/word2vec_model_qa1_single-supporting-fact_train_factsOnly
+#Clusters computed are stored in ../clusters/qa1_single-supporting-fact_train_factsOnly_cluster.json
+#NLP_QA_Project/src$ python word2vec_cluster.py ../input/qa2_two-supporting-facts_train_factsOnly.txt 
+#Word2Vec model is stored in ../models/word2vec_model_qa2_two-supporting-facts_train_factsOnly
+#Clusters computed are stored in ../clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json
+#NLP_QA_Project/src$ python word2vec_cluster.py ../input/qa6_yes-no-questions_train_factsOnly.txt 
+#Word2Vec model is stored in ../models/word2vec_model_qa6_yes-no-questions_train_factsOnly
+#Clusters computed are stored in ../clusters/qa6_yes-no-questions_train_factsOnly_cluster.json
+#NLP_QA_Project/src$ 
 
 import argparse, json, os
 import gensim, logging
@@ -42,7 +45,7 @@ def trainModel(factFile, verboseMode):
     model = gensim.models.Word2Vec(sentences, size=200, workers=4)
 
     # You can store/load models using the standard gensim methods
-    modelFileName = 'models/word2vec_model_' + getFileNamePart(factFile)
+    modelFileName = '../models/word2vec_model_' + getFileNamePart(factFile)
     model.save(modelFileName)
     print("Word2Vec model is stored in {}".format(modelFileName))
 
@@ -187,7 +190,7 @@ def main():
     
     trainModel(factFile, verboseMode)
     
-    genSim_model = gensim.models.Word2Vec.load('models/word2vec_model_' + getFileNamePart(factFile))
+    genSim_model = gensim.models.Word2Vec.load('../models/word2vec_model_' + getFileNamePart(factFile))
     
     clustersComputed = clusterWordEmbeddings(genSim_model, verboseMode)
     
@@ -202,7 +205,7 @@ def main():
             no_of_clusters += 1
     #pprint(clustersReComputed)
     
-    clusterFileName = "clusters/" + getFileNamePart(factFile) + "_cluster.json"
+    clusterFileName = "../clusters/" + getFileNamePart(factFile) + "_cluster.json"
     with open(clusterFileName, 'w') as outfile:
         json.dump(clustersReComputed, outfile, indent=4)
     print("Clusters computed are stored in {}".format(clusterFileName))

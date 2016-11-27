@@ -1,45 +1,44 @@
-#python34 classifyVerbLemma.py input/qa2_two-supporting-facts_train_POS_Lemma.jl clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json 
-#Reading Clusters...
-#{'0': ['office', 'hallway', 'garden', 'bedroom', 'kitchen', 'bathroom'],
- #'1': ['grabbed', 'took', 'picked', 'got', 'up'],
- #'2': ['put', 'discarded', 'left', 'down', 'dropped'],
- #'3': ['Sandra', 'Mary', 'John', 'Daniel'],
- #'4': ['milk', 'football', 'apple'],
- #'5': ['moved', 'journeyed', 'travelled', 'went', 'back']}
+#python34 classify_verb_lemma.py ../input/qa2_two-supporting-facts_train_POS_Lemma.jl ../clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json Reading Clusters...
+#{'0': ['put', 'left', 'discarded', 'dropped', 'down'],
+ #'1': ['grabbed', 'up', 'got', 'took', 'picked'],
+ #'2': ['travelled', 'moved', 'journeyed', 'back', 'went'],
+ #'3': ['football', 'apple', 'milk'],
+ #'4': ['Daniel', 'Sandra', 'John', 'Mary'],
+ #'5': ['garden', 'office', 'kitchen', 'hallway', 'bedroom', 'bathroom']}
 #Cluster Mapping Relation
-#{'1': {'3:4'}, '2': {'3:4'}, '5': {'3:0'}}
+#{'0': {'4:3'}, '1': {'4:3'}, '2': {'4:5'}}
 
-#{'verb_1': {'data': ['grabbed', 'took', 'picked', 'got', 'up'],
-            #'lemma_data': ['grab', 'take', 'pick', 'get'],
-            #'set_A': ['Sandra', 'Mary', 'John', 'Daniel'],
-            #'set_B': ['milk', 'football', 'apple']},
- #'verb_2': {'data': ['put', 'discarded', 'left', 'down', 'dropped'],
-            #'lemma_data': ['put', 'discard', 'leave', 'drop'],
-            #'set_A': ['Sandra', 'Mary', 'John', 'Daniel'],
-            #'set_B': ['milk', 'football', 'apple']},
- #'verb_5': {'data': ['moved', 'journeyed', 'travelled', 'went', 'back'],
-            #'lemma_data': ['move', 'journey', 'travel', 'go'],
-            #'set_A': ['Sandra', 'Mary', 'John', 'Daniel'],
-            #'set_B': ['office',
-                      #'hallway',
-                      #'garden',
-                      #'bedroom',
+#{'verb_0': {'data': ['put', 'left', 'discarded', 'dropped', 'down'],
+            #'lemma_data': ['put', 'leave', 'discard', 'drop'],
+            #'set_A': ['Daniel', 'Sandra', 'John', 'Mary'],
+            #'set_B': ['football', 'apple', 'milk']},
+ #'verb_1': {'data': ['grabbed', 'up', 'got', 'took', 'picked'],
+            #'lemma_data': ['grab', 'get', 'take', 'pick'],
+            #'set_A': ['Daniel', 'Sandra', 'John', 'Mary'],
+            #'set_B': ['football', 'apple', 'milk']},
+ #'verb_2': {'data': ['travelled', 'moved', 'journeyed', 'back', 'went'],
+            #'lemma_data': ['travel', 'move', 'journey', 'go'],
+            #'set_A': ['Daniel', 'Sandra', 'John', 'Mary'],
+            #'set_B': ['garden',
+                      #'office',
                       #'kitchen',
+                      #'hallway',
+                      #'bedroom',
                       #'bathroom']}}
-#verbMapping results found in verbMapping/qa2_two-supporting-facts_train_factsOnly_cluster_classifyVerb.json
+#verbMapping results found in ../verbMapping/qa2_two-supporting-facts_train_factsOnly_cluster_classifyVerb.json
 #Provide a className for following set of verbs
-#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['put', 'discard', 'leave', 'drop']
+#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['travel', 'move', 'journey', 'go']
+#t
+#Provide a className for following set of verbs
+#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['put', 'leave', 'discard', 'drop']
 #d
 #Provide a className for following set of verbs
-#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['grab', 'take', 'pick', 'get']
+#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['grab', 'get', 'take', 'pick']
 #a
-#Provide a className for following set of verbs
-#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['move', 'journey', 'travel', 'go']
-#t
-#{'attach': ['grab', 'take', 'pick', 'get'],
- #'detach': ['put', 'discard', 'leave', 'drop'],
- #'transport': ['move', 'journey', 'travel', 'go']}
-#annotatedVerbs results found in annotatedVerbs/qa2_two-supporting-facts_train_factsOnly_cluster_annotatedVerb.json
+#{'attach': ['grab', 'get', 'take', 'pick'],
+ #'detach': ['put', 'leave', 'discard', 'drop'],
+ #'transport': ['travel', 'move', 'journey', 'go']}
+#annotatedVerbs results found in ../annotatedVerbs/qa2_two-supporting-facts_train_factsOnly_cluster_annotatedVerb.json
 
 
 
@@ -73,7 +72,7 @@ def annotateVerbs(resultDict, annotatedVerbFileName):
         else:
             annotatedVerbDict[className] = resultDict[verb]["lemma_data"]
     pprint(annotatedVerbDict)
-    annotatedVerbFilePath = "annotatedVerbs/" + annotatedVerbFileName
+    annotatedVerbFilePath = "../annotatedVerbs/" + annotatedVerbFileName
     with open(annotatedVerbFilePath, 'w') as outFile:
         json.dump(annotatedVerbDict, outFile, indent=4)
     print("annotatedVerbs results found in {}".format(annotatedVerbFilePath))
@@ -118,11 +117,12 @@ def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
                 clusterNN  = entityClusterDict.get(pos_nn, None)
                 clusterNNP = entityClusterDict.get(pos_nnp, None)
                 #print(clusterNNP, clusterVerb, clusterNN)
-                relationTuple = clusterNNP + ':' + clusterNN
-                if clusterVerb in clusterVerbDict:
-                    clusterVerbDict[clusterVerb].add(relationTuple)
-                else:
-                    clusterVerbDict[clusterVerb] = set([relationTuple])
+                if clusterVerb:
+                    relationTuple = clusterNNP + ':' + clusterNN
+                    if clusterVerb in clusterVerbDict:
+                        clusterVerbDict[clusterVerb].add(relationTuple)
+                    else:
+                        clusterVerbDict[clusterVerb] = set([relationTuple])
     print("Cluster Mapping Relation")
     pprint(clusterVerbDict)
     print()
@@ -146,7 +146,7 @@ def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
             verbDetails[setB] = setB_Data
             resultDict[verbName] = verbDetails
     pprint(resultDict)
-    resultFilePath = "verbMapping/" + classifyVerbFileName
+    resultFilePath = "../verbMapping/" + classifyVerbFileName
     with open(resultFilePath, 'w') as outFile:
         json.dump(resultDict, outFile, indent=4)
     print("verbMapping results found in {}".format(resultFilePath))

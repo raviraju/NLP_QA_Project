@@ -1,28 +1,30 @@
 {
-    "verb_3": {
-        "set_B": [
-            "office",
-            "kitchen",
-            "garden",
-            "hallway"
-        ],
-        "set_A": [
-            "Sandra",
-            "Mary",
-            "John",
-            "Daniel"
-        ],
+    "verb_1": {
         "data": [
+            "went",
             "moved",
             "travelled",
-            "journeyed",
-            "went"
+            "journeyed"
         ],
         "lemma_data": [
+            "go",
             "move",
             "travel",
-            "journey",
-            "go"
+            "journey"
+        ],
+        "set_B": [
+            "bedroom",
+            "kitchen",
+            "office",
+            "hallway",
+            "garden",
+            "bathroom"
+        ],
+        "set_A": [
+            "Mary",
+            "Sandra",
+            "John",
+            "Daniel"
         ]
     }
 }

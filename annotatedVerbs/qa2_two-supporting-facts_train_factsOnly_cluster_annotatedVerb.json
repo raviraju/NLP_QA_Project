@@ -1,20 +1,20 @@
 {
-    "attach": [
-        "grab",
-        "take",
-        "pick",
-        "get"
-    ],
     "detach": [
         "put",
-        "discard",
         "leave",
+        "discard",
         "drop"
     ],
+    "attach": [
+        "grab",
+        "get",
+        "take",
+        "pick"
+    ],
     "transport": [
+        "travel",
         "move",
         "journey",
-        "travel",
         "go"
     ]
 }

@@ -1,82 +1,77 @@
 {
-    "verb_1": {
-        "lemma_data": [
-            "discard",
-            "leave",
-            "put",
-            "drop"
-        ],
-        "data": [
-            "discarded",
-            "left",
-            "down",
-            "put",
-            "dropped"
-        ],
-        "set_A": [
-            "Daniel",
-            "Mary",
-            "John",
-            "Sandra"
-        ],
+    "verb_4": {
         "set_B": [
-            "apple",
-            "milk",
-            "football"
-        ]
-    },
-    "verb_5": {
+            "kitchen",
+            "hallway",
+            "bathroom",
+            "office",
+            "garden",
+            "bedroom"
+        ],
         "lemma_data": [
             "travel",
             "move",
-            "journey",
-            "go"
+            "go",
+            "journey"
+        ],
+        "set_A": [
+            "Daniel",
+            "Sandra"
         ],
         "data": [
             "travelled",
+            "back",
             "moved",
-            "journeyed",
-            "went"
-        ],
-        "set_A": [
-            "Daniel",
-            "Mary",
-            "John",
-            "Sandra"
-        ],
-        "set_B": [
-            "bathroom",
-            "garden",
-            "office",
-            "bedroom",
-            "hallway",
-            "kitchen"
+            "went",
+            "journeyed"
         ]
     },
-    "verb_0": {
-        "lemma_data": [
-            "take",
-            "grab",
-            "pick",
-            "get"
+    "verb_2": {
+        "set_B": [
+            "milk",
+            "football",
+            "apple"
         ],
-        "data": [
-            "up",
-            "took",
-            "grabbed",
-            "picked",
-            "got"
+        "lemma_data": [
+            "grab",
+            "get",
+            "pick",
+            "take"
         ],
         "set_A": [
             "Daniel",
-            "Mary",
-            "John",
             "Sandra"
         ],
+        "data": [
+            "grabbed",
+            "got",
+            "picked",
+            "took",
+            "up"
+        ]
+    },
+    "verb_3": {
         "set_B": [
-            "apple",
             "milk",
-            "football"
+            "football",
+            "apple"
+        ],
+        "lemma_data": [
+            "discard",
+            "put",
+            "leave",
+            "drop"
+        ],
+        "set_A": [
+            "Daniel",
+            "Sandra"
+        ],
+        "data": [
+            "down",
+            "discarded",
+            "put",
+            "left",
+            "dropped"
         ]
     }
 }

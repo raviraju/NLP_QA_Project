@@ -1,8 +1,8 @@
 {
     "transport": [
+        "go",
         "move",
         "travel",
-        "journey",
-        "go"
+        "journey"
     ]
 }

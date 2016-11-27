@@ -1,42 +1,40 @@
 # Temporal Graph for Babi QA Tasks
 
-This project aims to solve [Facebook AI Research(FAIR)'s babi QA tasks](https://research.facebook.com/research/babi/) using  temporal graph based approach.
+Goal to solve several [Facebook AI Research(FAIR)'s babi QA tasks](https://research.facebook.com/research/babi/) using a novel approach based on temporal graph traversal.
 
-This part of the project has 2 major parts and many sub parts:
-1. Construction of Temporal Graphs to representing the activities of actors in the story
- + Parsing the input dataset
- + Normalizing each statement in the story to (timestamp, subject, verb, object) tuple
- + Building the graph and visualizing it
-2. Answering questions based on inference on the graph data structure.
- + Parsing the questions
- + Traversing the graph to find the answers
+## Project Scope 
+To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
 
-Beside the above core system, this project also has two more supplementary modules:
-1. Interactive Shell
-2. Evaluator
+| # |   Task                                       |   Class name      |
+|---|----------------------------------------------|-------------------|
+| 1 |  Basic factoid QA with single supporting fact|    WhereIsActor   |
+| 2 |  Factoid QA with two supporting facts        |    WhereIsObject  |
+| 6 |  Yes/No questions                            |    IsActorThere   |
 
-## Structure of the project
-Detailed Explanation of each folders
+## Project Overview
+1. Construction of temporal graph to represent the activities of actors in the story
+ + Parse the input dataset-(facts of a task) to extract (timestamp, subject, verb, object) using Standford CoreNLP Parser
+ + Build the graph where Nodes represent subject & objects, Edges represent verb actions associating subject to object using python networkx module 
+ + Visualize graph using matplotlib.pyplot
+2. Answering questions by traversing graph.
+ + Parse the questions to identify subject/object and locate the corresponding node in graph
+ + Use Word Embedding and K-Means clustering on input dataset, to provide semantic heuristic to graph traversal algorithm  in    order to distingish verb actions which associate subject-object using gensim 
+   Clustered verb actions annotated into classes: attach, detach, transport
+ + Traverse the graph to find the answers
+3. Interactive mode to provide text2speech feedback while parsing stories using espeak accompained with intuitive graphs which present the state of graph model
 
-1. `/babiLemma`  
-  - `babiLemma_working.py` is the Python script that takes the input task file, generates the POS using Stanford Core NLP and builds the enriched JSON for future processing.
-  - Input file requried is placed in the folder Tests/babiLemmaInputFile/
-  - Output file is at the location Tests/outputResultsLemma/ with name NER_TEXT_1_Supp.jl.
-  - This NER_TEXT_1_Supp.jl has the enriched JSON which identifies each POS, facts, questions and serial number.
-
-2. `babiGraph`
- + `newBabiGraph.py` is the Python script that reads the output of previous step viz. NER_TEXT_1_Supp.jl and builds the graph for evey story.
- + Whenever a question is asked, the script traverses the graph and gets the correct answer based on the time stamp and classification.
- + Whenver a new story is detected, the previous old story or graph is cleared.
- + Input file is  /babI/Tests/outputResultsLemma/NER_TEXT_1_Supp.jl
- + Output file is generated at /babI/Tests/outputResultsGraph/outPutResults.jl
-3. Evaluation
-  +  The Python script /babI/babiGraph/evaluate.py evaluates the output of babiGraph step viz outPutResults.jl
-  + The number of correct answers as per our prediction and as per the dataset is provided at /babI/Tests/outputResultsGraph/evaluate.txt
-
-## Requirements
-+ Stanford Core NLP
-+ python-espeak
+## Project Structure
+1. `src\`              : source code
+2. `tasks_1-20_v1-2\`  : set of 20 tasks for testing text understanding and reasoning in the bAbI project
+ + http://www.thespermwhale.com/jaseweston/babi/tasks_1-20_v1-2.tar.gz
+3. `input\`            
+ + *_train.txt - tasks_1-20_v1-2/en-10k/ 10,000 training examples
+ + *_factsOnly.txt - files which is filtered to have just facts of stories
+ + *_POS_Lemma.jl - Part of Speech and Lemma identified
+4. `models\`  : word2vec binary model files using gensim
+5. `clusters\`  : clusters computed using k-means algorithm
+6. `verbMapping\`  : identify relationship between various clusters
+7. `annotatedVerbs\`  : verb action clusters annotated with class names(attach, detach, transport)
 
 ## Setup
 1. Setup Stanford CoreNLP server
@@ -45,29 +43,17 @@ Detailed Explanation of each folders
   2. Start the server on Port 9000  
      `java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer 9000`
 2. Python Espeak https://github.com/relsi/python-espeak
-
-
-## Instructions
-1. Parse the training data  
- ```
- babiparser.py --in Tests/babiLemmaInputFile/qa1_single-supporting-fact_train.txt \
---out output.jl
- ```
-
-## Notes:
-1. The paths as per now are hard-coded in the scripts and are realtive to my work environment, feel free to modify them as per your needs. Usually you can find the path in Globals.py.
-2. Images folder has the images how exactly the graph is being built for first 24 stories.
+3. GenSim : http://radimrehurek.com/gensim/install.html
+4. K-Means Clustering : http://scikit-learn.org/stable/install.html
 
 # Team
-
-An attempt to solve QA tasks (https://github.com/facebook/bAbI-tasks) leveraging Word-Embedding and Graph Timeline traversal
-
-
-| Resource               | Description                                                   |   Colloborator    |
+| Module               | Description                                                   |   Owner    |
 |------------------------|---------------------------------------------------------------|-------------------|
-| getFacts.py         | To extract facts of a given task-dataset excluding questions  | Ravi Raju Krishna |
-| word2vec_cluster.py | Clustering of facts using word2vec distributed representation | Ravi Raju Krishna |
 | babiparser.py	     | Generating the NER and POS for the given dataset		 | Aditya R Desai    |
 | babigraph.py          | Creating a story graph timeline for Q&A(1 Supp & YES/NO)  | Aditya R Desai    |
 | babigraph.py::BabiGraph | Reasoning based on 2 Supporting facts | Thamme Gowda    |
 | babigraph.py::ActionClassifier | Classifying Actions | Thamme Gowda, Ravi Raju Krishna |
+| get_facts.py         | To extract fact sentences(except questions) from all stories of a task | Ravi Raju Krishna |
+| word2vec_cluster.py | Clustering of facts using word2vec distributed representation | Ravi Raju Krishna |
+| classify_verb_lemma.py | Classify lemma verb actions into categories based on entities they connect | Ravi Raju Krishna |
+| babigraph.py-espeak | enabled interactive mode with text-to-speech capability using espeak python | Ravi Raju Krishna |

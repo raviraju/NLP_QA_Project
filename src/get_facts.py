@@ -18,12 +18,14 @@
 #8 Sandra journeyed to the bathroom.
 #9 Where is Daniel? 	hallway	4
 #10 Mary moved to the hallway.
-#NLP_QA_Project/src$ python get_facts.py ../input/qa1_single-supporting-fact_train.txt 
-#Facts written to ../input/qa1_single-supporting-fact_train_factsOnly.txt
-#NLP_QA_Project/src$ python get_facts.py ../input/qa2_two-supporting-facts_train.txt 
-#Facts written to ../input/qa2_two-supporting-facts_train_factsOnly.txt
-#NLP_QA_Project/src$ python get_facts.py ../input/qa6_yes-no-questions_train.txt 
-#Facts written to ../input/qa6_yes-no-questions_train_factsOnly.txt
+
+#/NLP_QA_Project$ python src/get_facts.py input/qa1_single-supporting-fact_train.txt
+				 #Facts written to input/qa1_single-supporting-fact_train_factsOnly.txt
+#/NLP_QA_Project$ python src/get_facts.py input/qa2_two-supporting-facts_train.txt 
+				 #Facts written to input/qa2_two-supporting-facts_train_factsOnly.txt
+#/NLP_QA_Project$ python src/get_facts.py input/qa6_yes-no-questions_train.txt 
+				 #Facts written to input/qa6_yes-no-questions_train_factsOnly.txt
+#/NLP_QA_Project$
 
 import argparse, os
 

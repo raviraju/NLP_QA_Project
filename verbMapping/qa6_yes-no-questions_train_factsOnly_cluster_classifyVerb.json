@@ -1,77 +1,85 @@
 {
-    "verb_4": {
-        "set_B": [
-            "kitchen",
-            "hallway",
-            "bathroom",
-            "office",
-            "garden",
-            "bedroom"
-        ],
-        "lemma_data": [
-            "travel",
-            "move",
-            "go",
-            "journey"
-        ],
-        "set_A": [
-            "Daniel",
-            "Sandra"
-        ],
+    "verb_1": {
         "data": [
-            "travelled",
-            "back",
-            "moved",
-            "went",
-            "journeyed"
-        ]
-    },
-    "verb_2": {
-        "set_B": [
-            "milk",
-            "football",
-            "apple"
+            "grabbed",
+            "picked",
+            "up",
+            "took",
+            "got"
         ],
         "lemma_data": [
             "grab",
-            "get",
             "pick",
-            "take"
+            "take",
+            "get"
+        ],
+        "set_B": [
+            "apple",
+            "football",
+            "milk"
         ],
         "set_A": [
-            "Daniel",
-            "Sandra"
-        ],
-        "data": [
-            "grabbed",
-            "got",
-            "picked",
-            "took",
-            "up"
+            "John",
+            "Sandra",
+            "the",
+            "Mary",
+            "Daniel"
         ]
     },
-    "verb_3": {
-        "set_B": [
-            "milk",
-            "football",
-            "apple"
+    "verb_2": {
+        "data": [
+            "discarded",
+            "down",
+            "left",
+            "put",
+            "dropped"
         ],
         "lemma_data": [
             "discard",
-            "put",
             "leave",
+            "put",
             "drop"
         ],
-        "set_A": [
-            "Daniel",
-            "Sandra"
+        "set_B": [
+            "apple",
+            "football",
+            "milk"
         ],
+        "set_A": [
+            "John",
+            "Sandra",
+            "the",
+            "Mary",
+            "Daniel"
+        ]
+    },
+    "verb_5": {
         "data": [
-            "down",
-            "discarded",
-            "put",
-            "left",
-            "dropped"
+            "journeyed",
+            "travelled",
+            "went",
+            "moved"
+        ],
+        "lemma_data": [
+            "journey",
+            "travel",
+            "go",
+            "move"
+        ],
+        "set_B": [
+            "garden",
+            "kitchen",
+            "bathroom",
+            "office",
+            "hallway",
+            "bedroom"
+        ],
+        "set_A": [
+            "John",
+            "Sandra",
+            "the",
+            "Mary",
+            "Daniel"
         ]
     }
 }

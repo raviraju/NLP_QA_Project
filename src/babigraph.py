@@ -19,13 +19,19 @@ male = espeak.ESpeak(amplitude=200, word_gap=-50, pitch=80, speed=220, voice='en
 
 class ActionClassifier(object):
 
-    def __init__(self, model=None):
+    def __init__(self, input_action, model=None):
         # Label -> set of Actions
-        self.model = model if model else {
-            'attach': set(['get', 'grab', 'pick', 'take']),
-            'detach': set(['discard', 'drop', 'leave', 'put']),
-            'transport': set(['go', 'journey', 'move', 'travel'])
-        }
+        with open(input_action,'r') as annotatedActions:
+            actions = json.load(annotatedActions)
+            actionsDict = {}
+            for actionClass in actions:
+                actionsDict[actionClass] = set(actions[actionClass])
+            self.model = model if model else actionsDict
+            #{
+                #'attach': set(['get', 'grab', 'pick', 'take']),
+                #'detach': set(['discard', 'drop', 'leave', 'put']),
+                #'transport': set(['go', 'journey', 'move', 'travel'])
+            #}
 
     def classify(self, action):
         for label, terms in self.model.items():
@@ -41,7 +47,8 @@ class BabiGraph(object):
                 save_graph=False,
                 int_graph=False,
                 interactive_delay = 0,
-                corenlp=Globals.CORENLP_SERVER):
+                corenlp=Globals.CORENLP_SERVER,
+                input_action=""):
         self.parser = BabiParser(corenlp)
         self.interactive = interactive
         self.interactive_delay = interactive_delay
@@ -49,7 +56,7 @@ class BabiGraph(object):
         self.subStoryFacts = {}
         self.G = nx.Graph()
         self.storyNum = 0
-        self.action_clsfr = ActionClassifier()
+        self.action_clsfr = ActionClassifier(input_action)
 
     def subStoryCheck(self, fact):
         if (fact == 1):
@@ -180,14 +187,25 @@ class BabiGraph(object):
         # print("Time Stamps :", timeStamps)
         latestTimeStamp = max(timeStamps, key=int)
         answer = candidates[latestTimeStamp]
+        concluded_answer = answer
         # convert answer to binary if expectation is yes no type
         if QJsonObj.get('expAnsType', '') == 'YESNO':
             answer = "yes" if answer == QJsonObj['POS_NN'] else "no"
         if self.interactive:
             print("Hence, we can infer that")
             female.say("Hence, we can infer that")
-            subj_type = "location" if node == subject else "object"
-            template_ans = self.getTemplateAns(subject, answer, subj_type)
+            template_ans = "Dont Know"
+            if QJsonObj.get('expAnsType', '') == 'YESNO':
+                respond = "Yes" if concluded_answer == QJsonObj['POS_NN'] else "No"
+                person = QJsonObj.get('POS_NNP', 'SomeOne')
+                location = QJsonObj.get('POS_NN', 'some where')
+                if answer == "no":
+                    template_ans = respond + ", " + person + " is not in the " + location
+                else:
+                    template_ans = respond + ", " + person + " is in the " + location
+            else:
+                subj_type = "location" if node == subject else "object"
+                template_ans = self.getTemplateAns(subject, answer, subj_type)
             female.say(template_ans)
             print(template_ans)
         return (answer, QJsonObj, self.storyNum)
@@ -295,9 +313,10 @@ if __name__ == "__main__":
     parser.add_argument("-i", "--interactive", help="enable interactive user mode", action="store_true")
     parser.add_argument("-ig", "--graph", help="enable interactive Graph", action="store_true")
     parser.add_argument("-in", "--input", help="Input file", default=Globals.NERTEXT_FILE)
+    parser.add_argument("-ia", "--input_action", help="Input file action annotated verbs", default=Globals.ANNOTATE_ACTIONS)
     parser.add_argument("-o", "--out", help="Output file", default=Globals.RESULTS_FILE)
 
     args = parser.parse_args()
-    bg = BabiGraph(args.interactive, int_graph=args.graph)
+    bg = BabiGraph(args.interactive, int_graph=args.graph, input_action=args.input_action)
     results = bg.play(args.input)
     bg.write_results(results, args.out)

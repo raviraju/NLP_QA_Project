@@ -1,44 +1,112 @@
-#python34 classify_verb_lemma.py ../input/qa2_two-supporting-facts_train_POS_Lemma.jl ../clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json Reading Clusters...
-#{'0': ['put', 'left', 'discarded', 'dropped', 'down'],
- #'1': ['grabbed', 'up', 'got', 'took', 'picked'],
- #'2': ['travelled', 'moved', 'journeyed', 'back', 'went'],
- #'3': ['football', 'apple', 'milk'],
- #'4': ['Daniel', 'Sandra', 'John', 'Mary'],
- #'5': ['garden', 'office', 'kitchen', 'hallway', 'bedroom', 'bathroom']}
-#Cluster Mapping Relation
-#{'0': {'4:3'}, '1': {'4:3'}, '2': {'4:5'}}
+#/NLP_QA_Project$ python34 src/classify_verb_lemma.py input/qa1_single-supporting-fact_train.jl clusters/qa1_single-supporting-fact_train_factsOnly_cluster.json 
+				#Reading Clusters...
+				#{'0': ['Mary', 'Sandra'],
+				 #'1': ['Daniel', 'John'],
+				 #'2': ['bathroom', 'bedroom', 'kitchen', 'hallway', 'office', 'garden'],
+				 #'3': ['moved', 'journeyed', 'travelled', 'went']}
+				#Cluster Mapping Relation
+				#{'3': {'0:2', '1:2'}}
 
-#{'verb_0': {'data': ['put', 'left', 'discarded', 'dropped', 'down'],
-            #'lemma_data': ['put', 'leave', 'discard', 'drop'],
-            #'set_A': ['Daniel', 'Sandra', 'John', 'Mary'],
-            #'set_B': ['football', 'apple', 'milk']},
- #'verb_1': {'data': ['grabbed', 'up', 'got', 'took', 'picked'],
-            #'lemma_data': ['grab', 'get', 'take', 'pick'],
-            #'set_A': ['Daniel', 'Sandra', 'John', 'Mary'],
-            #'set_B': ['football', 'apple', 'milk']},
- #'verb_2': {'data': ['travelled', 'moved', 'journeyed', 'back', 'went'],
-            #'lemma_data': ['travel', 'move', 'journey', 'go'],
-            #'set_A': ['Daniel', 'Sandra', 'John', 'Mary'],
-            #'set_B': ['garden',
-                      #'office',
-                      #'kitchen',
-                      #'hallway',
-                      #'bedroom',
-                      #'bathroom']}}
-#verbMapping results found in ../verbMapping/qa2_two-supporting-facts_train_factsOnly_cluster_classifyVerb.json
-#Provide a className for following set of verbs
-#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['travel', 'move', 'journey', 'go']
-#t
-#Provide a className for following set of verbs
-#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['put', 'leave', 'discard', 'drop']
-#d
-#Provide a className for following set of verbs
-#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['grab', 'get', 'take', 'pick']
-#a
-#{'attach': ['grab', 'get', 'take', 'pick'],
- #'detach': ['put', 'leave', 'discard', 'drop'],
- #'transport': ['travel', 'move', 'journey', 'go']}
-#annotatedVerbs results found in ../annotatedVerbs/qa2_two-supporting-facts_train_factsOnly_cluster_annotatedVerb.json
+				#{'verb_3': {'data': ['moved', 'journeyed', 'travelled', 'went'],
+							#'lemma_data': ['move', 'journey', 'travel', 'go'],
+							#'set_A': ['Daniel', 'John'],
+							#'set_B': ['bathroom',
+									  #'bedroom',
+									  #'kitchen',
+									  #'hallway',
+									  #'office',
+									  #'garden']}}
+				#verbMapping results found in verbMapping/qa1_single-supporting-fact_train_factsOnly_cluster_classifyVerb.json
+				#Provide a className for following set of verbs
+				#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['move', 'journey', 'travel', 'go']
+				#t
+				#{'transport': ['move', 'journey', 'travel', 'go']}
+				#annotatedVerbs results found in annotatedVerbs/qa1_single-supporting-fact_train_factsOnly_cluster_annotatedVerb.json
+#/NLP_QA_Project$ python34 src/classify_verb_lemma.py input/qa2_two-supporting-facts_train.jl clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json 
+				#Reading Clusters...
+				#{'0': ['hallway', 'kitchen', 'garden', 'bedroom', 'office', 'bathroom'],
+				 #'1': ['journeyed', 'travelled', 'moved', 'went'],
+				 #'2': ['football', 'milk', 'apple'],
+				 #'3': ['got', 'took', 'grabbed', 'picked', 'up'],
+				 #'4': ['put', 'dropped', 'discarded', 'down', 'left'],
+				 #'5': ['Mary', 'Daniel', 'Sandra', 'John']}
+				#Cluster Mapping Relation
+				#{'1': {'5:0'}, '3': {'5:2'}, '4': {'5:2'}}
+
+				#{'verb_1': {'data': ['journeyed', 'travelled', 'moved', 'went'],
+							#'lemma_data': ['journey', 'travel', 'move', 'go'],
+							#'set_A': ['Mary', 'Daniel', 'Sandra', 'John'],
+							#'set_B': ['hallway',
+									  #'kitchen',
+									  #'garden',
+									  #'bedroom',
+									  #'office',
+									  #'bathroom']},
+				 #'verb_3': {'data': ['got', 'took', 'grabbed', 'picked', 'up'],
+							#'lemma_data': ['get', 'take', 'grab', 'pick'],
+							#'set_A': ['Mary', 'Daniel', 'Sandra', 'John'],
+							#'set_B': ['football', 'milk', 'apple']},
+				 #'verb_4': {'data': ['put', 'dropped', 'discarded', 'down', 'left'],
+							#'lemma_data': ['put', 'drop', 'discard', 'leave'],
+							#'set_A': ['Mary', 'Daniel', 'Sandra', 'John'],
+							#'set_B': ['football', 'milk', 'apple']}}
+				#verbMapping results found in verbMapping/qa2_two-supporting-facts_train_factsOnly_cluster_classifyVerb.json
+				#Provide a className for following set of verbs
+				#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['journey', 'travel', 'move', 'go']
+				#t
+				#Provide a className for following set of verbs
+				#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['get', 'take', 'grab', 'pick']
+				#a
+				#Provide a className for following set of verbs
+				#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['put', 'drop', 'discard', 'leave']
+				#d
+				#{'attach': ['get', 'take', 'grab', 'pick'],
+				 #'detach': ['put', 'drop', 'discard', 'leave'],
+				 #'transport': ['journey', 'travel', 'move', 'go']}
+				#annotatedVerbs results found in annotatedVerbs/qa2_two-supporting-facts_train_factsOnly_cluster_annotatedVerb.json
+#/NLP_QA_Project$ python34 src/classify_verb_lemma.py input/qa6_yes-no-questions_train.jl clusters/qa6_yes-no-questions_train_factsOnly_cluster.json 
+				#Reading Clusters...
+				#{'0': ['garden', 'kitchen', 'bathroom', 'office', 'hallway', 'bedroom'],
+				 #'1': ['grabbed', 'picked', 'up', 'took', 'got'],
+				 #'2': ['discarded', 'down', 'left', 'put', 'dropped'],
+				 #'3': ['apple', 'football', 'milk'],
+				 #'4': ['John', 'Sandra', 'the', 'Mary', 'Daniel'],
+				 #'5': ['journeyed', 'travelled', 'went', 'moved']}
+				#Cluster Mapping Relation
+				#{'1': {'4:3'}, '2': {'4:3'}, '5': {'4:0'}}
+
+				#{'verb_1': {'data': ['grabbed', 'picked', 'up', 'took', 'got'],
+							#'lemma_data': ['grab', 'pick', 'take', 'get'],
+							#'set_A': ['John', 'Sandra', 'the', 'Mary', 'Daniel'],
+							#'set_B': ['apple', 'football', 'milk']},
+				 #'verb_2': {'data': ['discarded', 'down', 'left', 'put', 'dropped'],
+							#'lemma_data': ['discard', 'leave', 'put', 'drop'],
+							#'set_A': ['John', 'Sandra', 'the', 'Mary', 'Daniel'],
+							#'set_B': ['apple', 'football', 'milk']},
+				 #'verb_5': {'data': ['journeyed', 'travelled', 'went', 'moved'],
+							#'lemma_data': ['journey', 'travel', 'go', 'move'],
+							#'set_A': ['John', 'Sandra', 'the', 'Mary', 'Daniel'],
+							#'set_B': ['garden',
+									  #'kitchen',
+									  #'bathroom',
+									  #'office',
+									  #'hallway',
+									  #'bedroom']}}
+				#verbMapping results found in verbMapping/qa6_yes-no-questions_train_factsOnly_cluster_classifyVerb.json
+				#Provide a className for following set of verbs
+				#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['grab', 'pick', 'take', 'get']
+				#a
+				#Provide a className for following set of verbs
+				#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['discard', 'leave', 'put', 'drop']
+				#d
+				#Provide a className for following set of verbs
+				#Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['journey', 'travel', 'go', 'move']
+				#t
+				#{'attach': ['grab', 'pick', 'take', 'get'],
+				 #'detach': ['discard', 'leave', 'put', 'drop'],
+				 #'transport': ['journey', 'travel', 'go', 'move']}
+				#annotatedVerbs results found in annotatedVerbs/qa6_yes-no-questions_train_factsOnly_cluster_annotatedVerb.json
+#/NLP_QA_Project$ 
 
 
 
@@ -72,7 +140,7 @@ def annotateVerbs(resultDict, annotatedVerbFileName):
         else:
             annotatedVerbDict[className] = resultDict[verb]["lemma_data"]
     pprint(annotatedVerbDict)
-    annotatedVerbFilePath = "../annotatedVerbs/" + annotatedVerbFileName
+    annotatedVerbFilePath = "annotatedVerbs/" + annotatedVerbFileName
     with open(annotatedVerbFilePath, 'w') as outFile:
         json.dump(annotatedVerbDict, outFile, indent=4)
     print("annotatedVerbs results found in {}".format(annotatedVerbFilePath))
@@ -146,7 +214,7 @@ def identifyClasses(pos_lemmaTagged_factFile, clusters_factFile):
             verbDetails[setB] = setB_Data
             resultDict[verbName] = verbDetails
     pprint(resultDict)
-    resultFilePath = "../verbMapping/" + classifyVerbFileName
+    resultFilePath = "verbMapping/" + classifyVerbFileName
     with open(resultFilePath, 'w') as outFile:
         json.dump(resultDict, outFile, indent=4)
     print("verbMapping results found in {}".format(resultFilePath))

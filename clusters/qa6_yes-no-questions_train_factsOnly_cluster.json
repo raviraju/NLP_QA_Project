@@ -1,49 +1,42 @@
 {
     "0": [
+        "garden",
         "kitchen",
-        "hallway",
         "bathroom",
         "office",
-        "garden",
+        "hallway",
         "bedroom"
     ],
     "1": [
-        "milk",
-        "football",
-        "apple"
+        "grabbed",
+        "picked",
+        "up",
+        "took",
+        "got"
     ],
     "2": [
-        "grabbed",
-        "got",
-        "picked",
-        "took",
-        "up"
-    ],
-    "3": [
-        "down",
         "discarded",
-        "put",
+        "down",
         "left",
+        "put",
         "dropped"
     ],
+    "3": [
+        "apple",
+        "football",
+        "milk"
+    ],
     "4": [
-        "travelled",
-        "back",
-        "moved",
-        "went",
-        "journeyed"
+        "John",
+        "Sandra",
+        "the",
+        "Mary",
+        "Daniel"
     ],
     "5": [
-        "Daniel",
-        "Sandra"
-    ],
-    "6": [
-        "Daniel",
-        "Mary",
-        "the"
-    ],
-    "7": [
-        "Daniel",
-        "John"
+        "journeyed",
+        "travelled",
+        "went",
+        "moved"
     ]
 }

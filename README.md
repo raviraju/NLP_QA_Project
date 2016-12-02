@@ -23,6 +23,9 @@ To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
  + Traverse the graph to find the answers
 3. Interactive mode to provide text2speech feedback while parsing stories using espeak accompained with intuitive graphs which present the state of graph model
 
+## Project Demo : https://www.youtube.com/watch?v=WnN6i4ODGHM
+## Project Pipeline : [How To Guide](https://github.com/raviraju/NLP_QA_Project/blob/master/HowToGuide.md)
+
 ## Project Structure
 1. `src\`              : source code
 2. `tasks_1-20_v1-2\`  : set of 20 tasks for testing text understanding and reasoning in the bAbI project
@@ -45,6 +48,7 @@ To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
 2. Python Espeak https://github.com/relsi/python-espeak
 3. GenSim : http://radimrehurek.com/gensim/install.html
 4. K-Means Clustering : http://scikit-learn.org/stable/install.html
+
 
 # Team
 | Module               | Description                                                   |   Owner    |

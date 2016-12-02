@@ -1,0 +1,85 @@
+IBM Watson Academy Course On : Cognitive Computing MOOC Question Answering Technologies Behind IBM Watson
+https://developer.ibm.com/academic/resources/cognitive-computing-educator-guide/
+
+two major modern paradigms of question answering—
+	IR-based question answering and 
+	knowledge based question answering 
+	to answer questions about baseball statistics or scientific facts.
+	
+Factoid questions are questions that can be answered with simple facts expressed in short text answers.
+	The following factoid questions, for example, can be answered with a
+	short string expressing a personal name, temporal expression, or location:
+	(28.1) Who founded Virgin Airlines?
+	(28.2) What is the average age of the onset of autism?
+	(28.3) Where is Apple Computer based?
+
+Syntactic Parsing#natural language text to syntactic parse tree	 using English Slot Grammar Parser
+Semantic Role Labelling#Predicate Argument Structure : Identify Subject, Object, Predicate ()
+advanced analytics
+	information extraction
+	1.named entity detection# name of people, nations, cities, books, movies, weapons, musical instruments, dates, times, food
+	2.anaphora resolution system #he , it(Pronoun to Noun Mapping), identify pronouns and link them to their respective nouns
+	Temporal Normalization : Detect date time expressed in different formats
+	3.relation extraction system:#classify the relation between two entities mentioned into one of the predefined relation classes
+		issues : dealing with ambiguity of pattern, ("The New Jersey Devils have signed Adam Larsson to a three year, entry level contract", "Thomas Jefferson has signed the Declaration of Independence")
+				 dealing with the expressivity of language("IBM hired James, James started at IBM, James of IBM, so all those are ways to refer that James is employed by IBM. ")
+		statistical sol : Topicalized Wide Relation and Entity eXtraction(TWREX)
+				a supervised learning system that learns the model for every of the relation in DBpedia
+	Question Analysis
+	1.Focus, #part of a question which, when replaced with the correct answer, generates a true statement
+		"Who discovered India in 1498?", FOCUS : "Who"
+		 Strategy : replace the focus with the probable correct answer and looking for evidence of the statement in text.
+	2.LAT, #Rules and Statistical Learning(employing rules as features)
+		terms in the question that indicate the type of entity being described in the question, i.e entity type for answer
+	3.Question Categorization
+		choose an effective strategy for finding the correct answer by classifying questions : questions of a particular category are processed differently. 
+	
+Passage Scoring#Textual Entailment, After Supporting Passage are Retrieved(SPR), apply multiple statergies to recognise textual entailment on SPR
+	textual entailment capability comes from Watson's natural language processing stack.
+	to find evidence from unstructured data by trying to understand the data
+	Not solving Entailment Task, Identify a few sol that are particularly good for QA
+	Passage Scoring Features :
+		Passage Term Match : treat question and supporting passage as bag of words {set of words}
+			employ soft matching : arrival <--> arrived
+			use Geography Ontology  : kappad beach <--> in India
+		Textual Alignment: sequence of word alignment in question and supporting passage [list, of, words]
+			takes into account the structure of text
+			emploing soft matching 
+			Order matters :
+				same order --> higher weight
+				not same order --> lower weight
+		Skip Bigram : more advanced , Instead of order, Consider Syntactic Dependancies
+			takes into account the parsing structure
+			subject-verb-object heuristic 
+		LFACS : Most Advanced : Logical Form Answer Candidate Scorer : Mapping logical predicate form of question to logical perdicate form of answer
+			focus is centered on subGraph matching
+			Align graph of question to graph of passage 
+			
+				invented								invented
+			Who?		Telephone					Bell		Telephone
+		LSA	: Latent Semantic Analysis : making use of topic models, ontologies
+			semantic relations in logical form
+		Kernel Methods : String Kernel, word sequence kernel for sequence of words similarity
+	Computational Expensive : May take forever if no parallel processing
+		100 candidates per question , 2000 passages per question
+	All Combination of Passage Scoring : 5% gain in performance
+
+
+NLP at 3 locations of Deep QA Pipeline:
+	1. On Question, at start of Question Analysis
+	2. On Primary Srch Results, before candidate answer generation
+	3. On supporting evidence, before deep evidence scoring 
+
+"He was a bank clerk in the Yukon before he published 'Songs of Sourbough' in 1907"
+I/P(Question) in CAS(having Parse Tree, POS, Entities, Relation)
+	1. Identify Focus : part of question tat is reference to answer(like pointer to answer)
+		"HE"				replace focus with right answer and look for evidence
+	2. Lexical Answer Type(LAT) : terms in question tat indicate what type of Entity is asked for 
+		"HE", "CLERK", "POET"
+							Rules
+							Statistical Supervised Learning : (with rules as features and other text features) (IMP : Stratergy to convert Rule-Based to ML)
+	3. Info Extraction: identify Entities and Relations bw them,Mapping to KB(wikipedia), is Hard
+	4. Question Classification : for each question class, different strategy is employed (different Watson Pipeline)			
+						ex : Definition Question : Dictionary lookup for definition 
+								Fill in blank(FIB) : we know where exactly to place answer (focus is "____" the blank)
+O/P in CAS(having Parse Tree, POS, Entities, Relation + Focus and LAT)

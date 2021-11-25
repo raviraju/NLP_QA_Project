@@ -1,0 +1,27 @@
+{
+    "misc": [
+        "to",
+        "back",
+        "the"
+    ],
+    "transport": [
+        "went",
+        "journeyed",
+        "travelled",
+        "moved"
+    ],
+    "person": [
+        "Mary",
+        "Daniel",
+        "John",
+        "Sandra"
+    ],
+    "location": [
+        "bathroom.",
+        "hallway.",
+        "office.",
+        "kitchen.",
+        "garden.",
+        "bedroom."
+    ]
+}

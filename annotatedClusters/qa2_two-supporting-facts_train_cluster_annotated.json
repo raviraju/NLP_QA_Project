@@ -1,0 +1,50 @@
+{
+    "person": [
+        "the",
+        "Daniel",
+        "Sandra",
+        "John",
+        "Mary"
+    ],
+    "location": [
+        "to",
+        "bedroom.",
+        "bathroom.",
+        "hallway.",
+        "garden.",
+        "office.",
+        "kitchen."
+    ],
+    "transport": [
+        "went",
+        "moved",
+        "journeyed",
+        "back",
+        "travelled"
+    ],
+    "misc": [
+        "there."
+    ],
+    "object": [
+        "milk",
+        "apple",
+        "football",
+        "milk.",
+        "apple.",
+        "football."
+    ],
+    "attach": [
+        "picked",
+        "up",
+        "got",
+        "grabbed",
+        "took"
+    ],
+    "detach": [
+        "left",
+        "discarded",
+        "dropped",
+        "put",
+        "down"
+    ]
+}

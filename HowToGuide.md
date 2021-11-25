@@ -1,81 +1,110 @@
-## Project Pipeline 
-**Use StanfordCoreNLP to fetch POS and Lemma**
+## Project Pipeline
+
+**Start the StanfordCoreNLP server on Port 9000**
+
+```java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000```
+
+Check http://localhost:9000/
+
+**Use StanfordCoreNLP to tokenize, fetch POS and Lemma**
+
 ```
-> python src/babiparser.py -i input/qa2_two-supporting-facts_train.txt -o input/qa2_two-supporting-facts_train.jl
-Files are being read and tokenized ...
-Done
+(base) $ mkdir parsedInput
+(base) $ python src/babiparser.py -i input/qa1_single-supporting-fact_train.txt -o parsedInput/qa1_single-supporting-fact_train.jl
+(base) $ python src/babiparser.py -i input/qa2_two-supporting-facts_train.txt -o parsedInput/qa2_two-supporting-facts_train.jl
+(base) $ python src/babiparser.py -i input/qa6_yes-no-questions_train.txt -o parsedInput/qa6_yes-no-questions_train.jl
+
+
+The file format for each task is as follows:
+ID text
+ID text
+ID text
+ID question[tab]answer[tab]supporting fact IDS.
+...
+The IDs for a given “story” start at 1 and increase. When the IDs in a file reset back to 1 we can consider the following sentences as a new “story”. Supporting fact IDs only ever reference the sentences within a “story”.
+
+4 Mary travelled to the hallway.
+5 Where is the milk? 	hallway	1 4
+
+{"sentence": "Mary travelled to the hallway.", "sNo": 4, "isFact": true, "posNNP": "Mary", "verb": "travelled", "posVerb": "VBD", "lemmaVerb": "travel", "posNN": "hallway"}
+{"sentence": "Where is the milk? ", "sNo": 5, "isFact": false, "answer": "hallway", "supportingFactNos": [1, 4], "posWHQ": "Where", "verb": "is", "posVerb": "VBZ", "lemmaVerb": "be", "posNN": "milk", "expectedAnsType": "WHERE"}
+
 ```
 
-**Extract fact sentences(except questions) from all stories of a task**
+**K-Means Clustering of facts using word2vec distributed representation**
 ```
-> python src/get_facts.py input/qa2_two-supporting-facts_train.txt 
-Facts written to input/qa2_two-supporting-facts_train_factsOnly.txt
-```
-
-**Clustering of facts using word2vec distributed representation**
-```
-> python src/word2vec_cluster.py input/qa2_two-supporting-facts_train_factsOnly.txt 
-Word2Vec model is stored in models/word2vec_model_qa2_two-supporting-facts_train_factsOnly
-Clusters computed are stored in clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json
+(base) $ python src/get_clusters.py parsedInput/qa1_single-supporting-fact_train.jl
+(base) $ python src/get_clusters.py parsedInput/qa2_two-supporting-facts_train.jl
+(base) $ python src/get_clusters.py parsedInput/qa6_yes-no-questions_train.jl
 ```
 
-**Classify lemma verb actions into categories based on entities they connect**
+**Annotate clusters**
 ```
->python34 src/classify_verb_lemma.py input/qa2_two-supporting-facts_train.jl clusters/qa2_two-supporting-facts_train_factsOnly_cluster.json 
-Reading Clusters...
-{'0': ['hallway', 'kitchen', 'garden', 'bedroom', 'office', 'bathroom'],
-'1': ['journeyed', 'travelled', 'moved', 'went'],
-'2': ['football', 'milk', 'apple'],
-'3': ['got', 'took', 'grabbed', 'picked', 'up'],
-'4': ['put', 'dropped', 'discarded', 'down', 'left'],
-'5': ['Mary', 'Daniel', 'Sandra', 'John']}
-Cluster Mapping Relation
-{'1': {'5:0'}, '3': {'5:2'}, '4': {'5:2'}}
+(base) $ python src/annotate_clusters.py clusters/qa1_single-supporting-fact_train_cluster.json 
 
-{'verb_1': {'data': ['journeyed', 'travelled', 'moved', 'went'],
-		'lemma_data': ['journey', 'travel', 'move', 'go'],
-		'set_A': ['Mary', 'Daniel', 'Sandra', 'John'],
-		'set_B': ['hallway',
-					'kitchen',
-					'garden',
-					'bedroom',
-					'office',
-					'bathroom']},
-'verb_3': {'data': ['got', 'took', 'grabbed', 'picked', 'up'],
-		'lemma_data': ['get', 'take', 'grab', 'pick'],
-		'set_A': ['Mary', 'Daniel', 'Sandra', 'John'],
-		'set_B': ['football', 'milk', 'apple']},
-'verb_4': {'data': ['put', 'dropped', 'discarded', 'down', 'left'],
-		'lemma_data': ['put', 'drop', 'discard', 'leave'],
-		'set_A': ['Mary', 'Daniel', 'Sandra', 'John'],
-		'set_B': ['football', 'milk', 'apple']}}
-verbMapping results found in verbMapping/qa2_two-supporting-facts_train_factsOnly_cluster_classifyVerb.json
-Provide a className for following set of verbs
-Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['journey', 'travel', 'move', 'go']
-t
-Provide a className for following set of verbs
-Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['get', 'take', 'grab', 'pick']
-a
-Provide a className for following set of verbs
-Provide a className (a : attach, d : detach, t : transport, anyOtheName) for set of verbs : ['put', 'drop', 'discard', 'leave']
-d
-{'attach': ['get', 'take', 'grab', 'pick'],
-'detach': ['put', 'drop', 'discard', 'leave'],
-'transport': ['journey', 'travel', 'move', 'go']}
-annotatedVerbs results found in annotatedVerbs/qa2_two-supporting-facts_train_factsOnly_cluster_annotatedVerb.json
+(base) $ python src/annotate_clusters.py clusters/qa2_two-supporting-facts_train_cluster.json 
+Provide a className for following set
+['the', 'Daniel', 'Sandra', 'John', 'Mary']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : person
+Provide a className for following set
+['to', 'bedroom.', 'bathroom.', 'hallway.', 'garden.', 'office.', 'kitchen.']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : location
+Provide a className for following set
+['went', 'moved', 'journeyed', 'back', 'travelled']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : t
+Provide a className for following set
+['there.']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : misc
+Provide a className for following set
+['milk', 'apple', 'football']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : object
+Provide a className for following set
+['picked', 'up', 'got', 'grabbed', 'took']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : a
+Provide a className for following set
+['milk.', 'apple.', 'football.']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : object
+Provide a className for following set
+['left', 'discarded', 'dropped', 'put', 'down']
+Provide a className (a : attach, d : detach, t : transport, anyClass) : d
+annotatedClusters results found in annotatedClusters/qa2_two-supporting-facts_train_cluster_annotated.json
+(base) $ 
+
+(base) $ python src/annotate_clusters.py clusters/qa6_yes-no-questions_train_cluster.json 
+
 ```
 
 **Build and Traverse Graph leveraging semantic heuristic derived from word embedding classes in order to distingish verb actions**
 ```
-> python3 src/babigraph.py -in input/qa2_two-supporting-facts_train.jl -ia annotatedVerbs/qa2_two-supporting-facts_train_factsOnly_cluster_annotatedVerb.json -o output/qa2_two-supporting-facts_train.tsv
-Wrote 10000 records to output/qa2_two-supporting-facts_train.tsv
+(base) $ python src/babigraph.py parsedInput/qa1_single-supporting-fact_train.jl annotatedClusters/qa1_single-supporting-fact_train_cluster_annotated.json -o output/qa1_single-supporting-fact_train.jl
+Wrote 10000 records to output/qa1_single-supporting-fact_train.jl
+(base) $ python src/babigraph.py parsedInput/qa2_two-supporting-facts_train.jl annotatedClusters/qa2_two-supporting-facts_train_cluster_annotated.json -o output/qa2_two-supporting-facts_train.jl
+Wrote 10000 records to output/qa2_two-supporting-facts_train.jl
+(base) $ python src/babigraph.py parsedInput/qa6_yes-no-questions_train.jl annotatedClusters/qa6_yes-no-questions_train_cluster_annotated.json -o output/qa6_yes-no-questions_train.jl
+Wrote 10000 records to output/qa6_yes-no-questions_train.jl
+(base) $ 
 ```
 
 **Evaluation : Ascertain no of questions correctly answered by the algorithm**
 ```
-> src/eval.sh output/qa2_two-supporting-facts_train.tsv 
-Total no of outputs to evaluate:
-10000 output/qa2_two-supporting-facts_train.tsv
-No of Correct(1)/InCorrect(0) Matches:
-	10000 1
+(base) $ python src/evaluate.py output/qa1_single-supporting-fact_train.jl Results : 
+noOfCorrectPredictions :  20000
+noOfInCorrectPredictions :  0
+        noOfAnswersMismatch :  0
+        noOfSupportingFactsMismatch :  0
+
+(base) $ python src/evaluate.py output/qa2_two-supporting-facts_train.jl 
+Results : 
+noOfCorrectPredictions :  10000
+noOfInCorrectPredictions :  0
+        noOfAnswersMismatch :  0
+        noOfSupportingFactsMismatch :  0
+
+(base) $ python src/evaluate.py output/qa6_yes-no-questions_train.jl 
+Results : 
+noOfCorrectPredictions :  10000
+noOfInCorrectPredictions :  0
+        noOfAnswersMismatch :  0
+        noOfSupportingFactsMismatch :  0
+(base) $ 
 ```

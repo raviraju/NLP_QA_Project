@@ -2,6 +2,9 @@
 
 Goal to solve several [Facebook AI Research(FAIR)'s babi QA tasks](https://research.facebook.com/research/babi/) using a novel approach based on temporal graph traversal.
 
+The tasks are described in detail in the paper : [Towards AI Complete Question Answering: A Set of Prerequisite Toy Tasks](TOWARDS_AI-COMPLETE_QUESTION_ANSWERING-A_SET_OF_PREREQUISITE_TOY_TASKS.pdf)
+[Artificial Tasks for AI](http://www.thespermwhale.com/jaseweston/babi/abordes-ICLR.pdf) Each task checks one skill that a reasoning system should have. Performing well on all of them is a pre-requisite for any system aiming at understanding language and able to reason. 
+
 ## Project Scope 
 To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
 
@@ -11,14 +14,20 @@ To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
 | 2 |  Factoid QA with two supporting facts        |    WhereIsObject  |
 | 6 |  Yes/No questions                            |    IsActorThere   |
 
+![Basic factoid QA with single supporting fact](t1.png)
+![Factoid QA with two supporting facts](t2.png)
+![Yes/No questions](t6.png)
+
+![Temporal Graph](temporalGraph.png)
+
 ## Project Overview
 1. Construction of temporal graph to represent the activities of actors in the story
- + Parse the input dataset-(facts of a task) to extract (timestamp, subject, verb, object) using Standford CoreNLP Parser
+ + Parse the input dataset-(facts of a task) to extract (timestamp, verb, pos, lemma) using Stanford CoreNLP Parser
  + Build the graph where Nodes represent subject & objects, Edges represent verb actions associating subject to object using python networkx module 
  + Visualize graph using matplotlib.pyplot
 2. Answering questions by traversing graph.
  + Parse the questions to identify subject/object and locate the corresponding node in graph
- + Use Word Embedding and K-Means clustering on input dataset, to provide semantic heuristic to graph traversal algorithm  in    order to distingish verb actions which associate subject-object using gensim 
+ + Use Word Embedding and K-Means clustering on input dataset, to provide semantic heuristic to graph traversal algorithm in order to distingish verb actions which associate subject-object using gensim 
    Clustered verb actions annotated into classes: attach, detach, transport
  + Traverse the graph to find the answers
 3. Interactive mode to provide text2speech feedback while parsing stories using espeak accompained with intuitive graphs which present the state of graph model
@@ -44,10 +53,13 @@ To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
   1. Download and extract Core NLP Server
      http://stanfordnlp.github.io/CoreNLP/#download
   2. Start the server on Port 9000  
-     `java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer 9000`
-2. Python Espeak https://github.com/relsi/python-espeak
-3. GenSim : http://radimrehurek.com/gensim/install.html
-4. K-Means Clustering : http://scikit-learn.org/stable/install.html
+     `java -mx4g -cp "*" edu.stanford.nlp.pipeline.StanfordCoreNLPServer -port 9000`
+     http://localhost:9000/
+  3. [Test Sample](corenlp.png)
+2. Python wrapper for Stanford CoreNLP : https://github.com/smilli/py-corenlp
+3. Espeak https://ports.macports.org/port/espeak-ng/, Python Espeak https://github.com/relsi/python-espeak
+4. GenSim : http://radimrehurek.com/gensim/install.html
+5. K-Means Clustering : http://scikit-learn.org/stable/install.html
 
 
 # Team

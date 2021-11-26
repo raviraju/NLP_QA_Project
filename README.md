@@ -39,14 +39,15 @@ To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
 1. `src\`              : source code
 2. `tasks_1-20_v1-2\`  : set of 20 tasks for testing text understanding and reasoning in the bAbI project
  + http://www.thespermwhale.com/jaseweston/babi/tasks_1-20_v1-2.tar.gz
-3. `input\`            
+3. `input\`
  + *_train.txt - tasks_1-20_v1-2/en-10k/ 10,000 training examples
- + *_factsOnly.txt - files which is filtered to have just facts of stories
- + *_POS_Lemma.jl - Part of Speech and Lemma identified
+4. `parsedInput\`
+ + *jl - Part of Speech and Facts/Question-Answer(Supporting Facts) identified
 4. `models\`  : word2vec binary model files using gensim
-5. `clusters\`  : clusters computed using k-means algorithm
-6. `verbMapping\`  : identify relationship between various clusters
-7. `annotatedVerbs\`  : verb action clusters annotated with class names(attach, detach, transport)
+5. `clusters\`  : clusters computed using k-means algorithm with best silhouette_score.
+6. `annotatedClusters\`  : annotated clusters with appropriate labels identifying (attach/detach/transport/person/location/misc)
+7. `output\` :
+ + *jl - predicted and actual answer with supportingFacts.
 
 ## Setup
 1. Setup Stanford CoreNLP server
@@ -62,11 +63,11 @@ To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
 5. K-Means Clustering : http://scikit-learn.org/stable/install.html
 
 
-# Team
+# Modules
 | Module               | Description                                                   |
 |----------------------|---------------------------------------------------------------|
-| babiparser.py	       | Parse the dataset to annotate POS using StanfordCoreNLP, identifying Facts/Question-Answer(Supporting Facts)		 |
-| get_clusters.py      | Leverage parsed input to obtain word2vec embedding for facts, cluster the vectors using k-means clustering with k (having best silhouette_score) |
-| annotate_clusters.py | Annotate clusters with appropriate labels identifying (attach/detach/transport/person/location/misc) |
-| babigraph.py         | Represents facts of story in temporal graph with Actors, Objects/Location as Nodes and relationship between them as edges labelled with timestamps using networkx. Parse the questions to identify the corresponding actor/object node in the graph. Leverage annotated cluster labels to filter candidate edges associated with the node and use the latest edge to answer the questions. |
-| evaluate.py          | Computes No of Correct and Incorrect Predictions |
+| [babiparser.py](src/babiparser.py)	       | Parse the dataset to annotate POS using StanfordCoreNLP, identifying Facts/Question-Answer(Supporting Facts)		 |
+| [get_clusters.py](src/get_clusters.py)      | Leverage parsed input to obtain word2vec embedding for facts, cluster the vectors using k-means clustering with k (having best silhouette_score) |
+| [annotate_clusters.py](src/annotate_clusters.py) | Annotate clusters with appropriate labels identifying (attach/detach/transport/person/location/misc) |
+| [babigraph.py](src/babigraph.py)         | Represents facts of story in temporal graph with Actors, Objects/Location as Nodes and relationship between them as edges labelled with timestamps using networkx. Parse the questions to identify the corresponding actor/object node in the graph. Leverage annotated cluster labels to filter candidate edges associated with the node and use the latest edge to answer the questions. |
+| [evaluate.py](src/evaluate.py)          | Computes No of Correct and Incorrect Predictions |

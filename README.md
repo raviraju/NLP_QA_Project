@@ -63,13 +63,10 @@ To solve 3 of 20 QA tasks (https://github.com/facebook/bAbI-tasks)
 
 
 # Team
-| Module               | Description                                                   |   Owner    |
-|------------------------|---------------------------------------------------------------|-------------------|
-| babiparser.py	     | Generating the NER and POS for the given dataset		 | Aditya R Desai    |
-| babigraph.py          | Creating a story graph timeline for Q&A(1 Supp & YES/NO)  | Aditya R Desai    |
-| babigraph.py::BabiGraph | Reasoning based on 2 Supporting facts | Thamme Gowda    |
-| babigraph.py::ActionClassifier | Classifying Actions | Thamme Gowda, Ravi Raju Krishna |
-| get_facts.py         | To extract fact sentences(except questions) from all stories of a task | Ravi Raju Krishna |
-| word2vec_cluster.py | Clustering of facts using word2vec distributed representation | Ravi Raju Krishna |
-| classify_verb_lemma.py | Classify lemma verb actions into categories based on entities they connect | Ravi Raju Krishna |
-| babigraph.py-espeak | enabled interactive mode with text-to-speech capability using espeak python | Ravi Raju Krishna |
+| Module               | Description                                                   |
+|----------------------|---------------------------------------------------------------|
+| babiparser.py	       | Parse the dataset to annotate POS using StanfordCoreNLP, identifying Facts/Question-Answer(Supporting Facts)		 |
+| get_clusters.py      | Leverage parsed input to obtain word2vec embedding for facts, cluster the vectors using k-means clustering with k (having best silhouette_score) |
+| annotate_clusters.py | Annotate clusters with appropriate labels identifying (attach/detach/transport/person/location/misc) |
+| babigraph.py         | Represents facts of story in temporal graph with Actors, Objects/Location as Nodes and relationship between them as edges labelled with timestamps using networkx. Parse the questions to identify the corresponding actor/object node in the graph. Leverage annotated cluster labels to filter candidate edges associated with the node and use the latest edge to answer the questions. |
+| evaluate.py          | Computes No of Correct and Incorrect Predictions |

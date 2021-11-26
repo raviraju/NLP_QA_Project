@@ -88,7 +88,7 @@ Wrote 10000 records to output/qa6_yes-no-questions_train.jl
 **Evaluation : Ascertain no of questions correctly answered by the algorithm**
 ```
 (base) $ python src/evaluate.py output/qa1_single-supporting-fact_train.jl Results : 
-noOfCorrectPredictions :  20000
+noOfCorrectPredictions :  10000
 noOfInCorrectPredictions :  0
         noOfAnswersMismatch :  0
         noOfSupportingFactsMismatch :  0
